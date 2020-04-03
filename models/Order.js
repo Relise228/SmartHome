@@ -1,0 +1,32 @@
+﻿const mongoose = require('mongoose');
+
+const OrderSchema = new mongoose.Schema({
+    client: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'client'
+    },
+    address: {
+        type: String,
+        required: false
+    },
+    products: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'productInOrder'
+        }
+    ],
+    totalPrice: {
+        type: Number,
+        required: false
+    },
+    status: {
+        type: String,
+        default: 'Cart'
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+})
+
+module.exports = Order = mongoose.model('order', OrderSchema);

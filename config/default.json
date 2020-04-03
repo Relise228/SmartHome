@@ -1,0 +1,4 @@
+﻿{
+    "mongoURI": "mongodb+srv://Savin:1qazxsw2@smarthome-l0iuw.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
+}
