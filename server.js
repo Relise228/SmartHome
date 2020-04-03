@@ -23,6 +23,7 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/goods', require('./routes/api/goods'));
 app.use('/api/cart', require('./routes/api/cart'));
+app.use('/api/order', require('./routes/api/order'));
 
 
 
