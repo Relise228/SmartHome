@@ -10,7 +10,7 @@ export class Header extends React.Component {
                 <div className="wrapper">
                     <div className="header_wrapper">
                     <div className="header_logo">
-                    <img src={logo} alt="home"/>
+                    <Link to='/'><img src={logo} alt="home"/></Link>
                     </div>
                     <div className = "header_menu">
                         <nav >
