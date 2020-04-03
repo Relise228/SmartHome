@@ -1,0 +1,12 @@
+.footer {
+    width: 100%;
+    border-top: 1px solid #74AEE7;
+    box-shadow: 0px -4px 7px rgba(116, 174, 231, 0.56);
+
+    &_text {
+        padding-top: 15px;
+        color: #206EBC;
+        font-weight: bold;
+        font-size: 14px;
+    }
+}
