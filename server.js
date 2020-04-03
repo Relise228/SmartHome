@@ -10,6 +10,11 @@ connectDB();
 app.use(express.json({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
