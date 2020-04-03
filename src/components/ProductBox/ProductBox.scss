@@ -1,0 +1,69 @@
+.box {
+	position: absolute;
+	width: 215px;
+	height: 279px;
+
+	border: 2px solid #74AEE7;
+	box-sizing: border-box;
+	box-shadow: 1px 4px 6px #74AEE7;
+    border-radius: 30px;
+    display: block;
+
+    
+}	
+
+.productImage{
+    position: relative;
+width: 178px;
+height: 131px;
+align: center;
+margin-top: 5px;
+left: 7%;
+}
+
+.productName{
+    position: relative;
+    width: 196px;
+    height: 51px;
+    padding-left: 5px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    
+
+    color: #000000;
+};
+
+.productPrice{
+    position: relative;
+width: 58px;
+height: 17px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+padding-left: 10px;
+padding-top: 20%;
+float: left;
+color: #206EBC;
+
+}
+
+.buyButton{
+    
+    width: 90px;
+    height: 42px;
+
+    border: 1px solid #74AEE7;
+    box-sizing: border-box;
+    border-radius: 30px;
+    margin-right: 5px;
+    margin-top: 15%;
+    float: right;
+    
+}
