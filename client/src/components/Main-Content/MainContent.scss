@@ -2,5 +2,14 @@
      &_content {
          width: 100%;
          padding-top: 45px;
+         display: flex;
+     }
+
+     &_grid {
+        margin-left: 80px;
+        display: grid;
+        grid-template-rows: 1fr 1fr ;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 2vw;
      }
  }
