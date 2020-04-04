@@ -7,6 +7,7 @@ export class ProductPage extends React.Component {
         super(props);
         this.state = {
             productID: this.props.match.params.productID,
+            code: 0,
             images: [],
             imagesURL: [],
             title: '',
@@ -65,7 +66,8 @@ export class ProductPage extends React.Component {
                 response.data.title,
                 response.data.manufacture,
                 response.data.description,
-                response.data.price);
+                response.data.price,
+                response.data.code);
             console.log(data);
           })
           .catch(function (error) {
@@ -76,8 +78,8 @@ export class ProductPage extends React.Component {
           });  
    }
 
-   setStates(images, title, manufacture, description, price){
-        this.setState({ images, title, manufacture, description, price });
+   setStates(images, title, manufacture, description, price, code){
+        this.setState({ images, code, title, manufacture, description, price });
         console.log(this.state.images);
    }
 
@@ -104,7 +106,7 @@ export class ProductPage extends React.Component {
                         </div>
                         <div className="product_info">
                             <h2 className="product_name">{this.state.title}</h2>
-                            <p className='product_code'>{"Код товару: " + this.state.productID}</p>
+                            <p className='product_code'>{"Код товару: " + this.state.code}</p>
                             <p className="product_description">{this.state.description}</p>
                         </div>
                     </div>

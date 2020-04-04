@@ -1,0 +1,75 @@
+.auth{
+    width: 370px;
+    margin-top: 100px;
+    margin-bottom: 220px;
+    
+
+    &_wrapper {
+        display: flex;
+        justify-content: center;
+   
+    
+    }
+
+    &_text {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #206EBC;
+    }
+
+    &_form {
+        
+    }
+
+    &_input {
+        width: 285px;
+        height: 45px;
+        border: 1px solid #74AEE7;
+        border-radius: 30px;
+        margin: 32px 0 0 20px;
+        outline: none;
+        padding-left: 20px;
+        font-size: 18px;
+        color: #74AEE7;
+        
+    }
+
+    &_input-text {
+        color: #74AEE7;
+        font-weight: bold;
+    }
+
+    &_button {
+        border: 1px solid #74AEE7;
+        color: #206EBC;
+        font-weight: bold;
+        border-radius: 30px;
+        background-color: transparent;
+        width: 120px;
+        height: 45px;
+        display: block;
+        margin: 31px auto 0 auto;
+        outline: none;
+        cursor: pointer;
+    }
+
+    &_button:active {
+        color: #fff;
+        background-color: #74AEE7;
+    }
+
+}
+
+.input_text {
+    margin-left: 30px;
+}
+
+.registration_text{
+    font-size: 12px;
+    color: #74AEE7;
+    text-align: center;
+    margin-top: 10px;
+}
+
+

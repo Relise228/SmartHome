@@ -16,7 +16,7 @@ export class Header extends React.Component {
                         <nav >
                             <ul className = "menu_list">
                                 <li><Link to='/' className="link_menu">Встановлення системи</Link></li>
-                                <li><Link to='/client/login' className="link_menu">Кабінет</Link></li>
+                                <li><Link to={localStorage.getItem("token") ? '/client/profile': '/client/login' } className="link_menu">Кабінет</Link></li>
                                 <li><Link to='client/cart' className="link_menu">Корзина</Link></li>
                             </ul>
                         </nav>
