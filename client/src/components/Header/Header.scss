@@ -21,6 +21,10 @@
         font-size: 16px;
     }
 
+    .menu_list > li:last-child{
+        margin-right: 0;
+    }
+
     .link_menu {
         color: #206EBC;
     }

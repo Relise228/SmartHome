@@ -17,6 +17,7 @@
     align: center;
     margin-top: 5px;
     left: 7%;
+    object-fit: cover;
 }
 
 .productName{
@@ -57,4 +58,9 @@
     float: right;
     background-color: transparent;
     outline: none;   
+    cursor: pointer;
+}
+.buyButton:active {
+    color: #fff;
+    background-color: #74AEE7;
 }

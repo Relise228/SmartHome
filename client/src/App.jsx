@@ -1,17 +1,22 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Main } from "./components/Main";
-
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { ProductPage } from "./components/ProductPage";
 
 export class App extends React.Component {
     render() {
         return (
             <div>
                 <BrowserRouter>
+                <Header/>
                     <Switch>
                         <Route exact={true} path='/' component={Main} />
+                        <Route path='/smarthome/:productID' component={ProductPage} />
                         {/* <Redirect to='/404' /> */}
                     </Switch>
+                <Footer/>
                 </BrowserRouter>
             </div>
         );
