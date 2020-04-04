@@ -19,7 +19,7 @@ router.post('/', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.json({ errors: errors.array() });
     }
 
     const {name, password, telephoneNumber, email} = req.body;
@@ -28,7 +28,7 @@ router.post('/', [
         let user = await Client.findOne({ email });
 
         if (user) {
-           return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+           return res.json({ errors: [{ msg: 'User already exists' }] });
         }
         
         user = new Client({
