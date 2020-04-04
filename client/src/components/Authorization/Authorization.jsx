@@ -1,6 +1,6 @@
 import React from 'react';
 import './Authorization.scss';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 export class Authorization extends React.Component {
@@ -9,13 +9,19 @@ export class Authorization extends React.Component {
         super(props) 
             this.state = {
                 email: undefined,
-                password: undefined
+                password: undefined,
+                error: undefined
             }
         this.setLogin = this.setLogin.bind(this);
         this.setPassword = this.setPassword.bind(this);
         this.onSubmitForm = this.onSubmitForm.bind(this);
         
     }
+
+    setError(error) {
+        this.setState({ error });
+    }
+    
 
     setLogin(e) {
         const email = e.currentTarget.value;
@@ -41,8 +47,18 @@ export class Authorization extends React.Component {
             password: this.state.password,
           }
           )
-          .then(function (response) {
-            console.log(response);
+          .then( response => {
+            if(response.data.errors){
+                this.setError(response.data.errors[0].msg);
+                console.log(this.state.error);
+            } else {
+                console.log(response)
+                localStorage.setItem("token", response.data.token);
+                console.log(localStorage.token);
+                this.props.history.push("/client/profile");
+                window.location.reload();
+            }
+ 
           })
           .catch(function (error) {
             console.log(error);

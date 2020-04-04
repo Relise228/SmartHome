@@ -62,12 +62,12 @@ export class ProductPage extends React.Component {
           })
           .then( response => {
             const data = response.data;
-            this.setStates(response.data.images,
-                response.data.title,
-                response.data.manufacture,
-                response.data.description,
-                response.data.price,
-                response.data.code);
+            this.setStates(response.data.system.images,
+                response.data.system.title,
+                response.data.system.manufacture,
+                response.data.system.description,
+                response.data.system.price,
+                response.data.system.code);
             console.log(data);
           })
           .catch(function (error) {
