@@ -1,0 +1,51 @@
+.order-product {
+
+    &_box {
+        display: none;
+        margin-top: 10px;
+    }
+
+
+    &_image-box {
+        width: 143px;
+        height: 127px;
+    }
+
+    &_image {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &_title{
+        padding-top: 20px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    &_info {
+        width: 100%;
+        margin-left: 30px;
+        
+    }
+
+    &_qp {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    &_quantity {
+        
+        color: #74AEE7;
+    }
+
+    &_price {
+        color: #206EBC;
+        font-weight: bold;
+        font-size: 18px;
+    }
+}
+
+.show_flex {
+    display: flex;
+}
