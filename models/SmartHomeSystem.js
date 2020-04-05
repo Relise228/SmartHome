@@ -11,6 +11,10 @@ const SmartHomeSystemSchema = new mongoose.Schema({
             required: false
         }
     ],
+    code: {
+        type: Number,
+        required: false
+    },
     manufacturer: {
         type: String,
         required: true

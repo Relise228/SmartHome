@@ -63,7 +63,7 @@ router.get('/:id', async (req, res) => {
         const system = await SmartHomeSystem.findById(req.params.id);
         
         if (!system) {
-            return res.status(404).json({ msg: 'System not found'});
+            return res.json({ msg: 'System not found'});
         }
 
         const reviews = await Review.find({product: req.params.id}).populate('client', 'name').sort('date');

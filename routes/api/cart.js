@@ -38,7 +38,7 @@ router.post('/confirm', auth, async (req, res) => {
         const { adress } = req.body;
         const cart = await Order.findOne({client : req.client.id, status : 'Cart'});
         if (!cart) {
-            res.status(404).json({ msg: 'Cart not found'});
+            res.json({ msg: 'Cart not found'});
         }
 
         cart.adress = adress;
@@ -72,7 +72,7 @@ router.post('/change', auth, async (req, res) => {
             populate: { path: 'product' }
         });
         if (!cart) {
-            res.status(404).json({ msg: 'Cart not found'});
+            res.json({ msg: 'Cart not found'});
         }
 
         cart.totalPrice = calculateOrderPrice(cart.products);
@@ -129,7 +129,7 @@ router.post('/', auth, async (req, res) => {
             populate: { path: 'product' }
         });
         if (!cart) {
-            res.status(404).json({ msg: 'Cart not found'});
+            res.json({ msg: 'Cart not found'});
         }
         const systemInCart = cart.products.find(system => system.product.id == systemId);
         if (systemInCart) {
