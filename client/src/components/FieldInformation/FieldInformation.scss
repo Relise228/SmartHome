@@ -1,0 +1,50 @@
+.info {
+
+    &_block-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        white-space: nowrap;
+    }
+
+    &_block {
+        margin-top: 33px;
+        width: 33.33%;
+    }
+
+    &_block > button {
+        float: right;
+    }
+
+    &_inf {
+        color: rgba(32, 110, 188, 0.8);
+        font-weight: bold;
+    }
+
+    &_value {
+        color: #000;
+        font-weight: bold;
+      
+    }
+
+    &_button-change {
+        width: 136px;
+        height: 30px;
+        border: 1px solid #206EBC;
+        background-color: transparent;
+        border-radius: 50px;
+        margin-left: 50px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    &_button-change:active {
+        background-color: #206EBC;
+        color: #fff;
+    }
+
+
+}
+
+
