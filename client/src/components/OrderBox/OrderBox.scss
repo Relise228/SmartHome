@@ -1,0 +1,23 @@
+.order {
+
+    &_short {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        margin-top: 20px;
+        padding-bottom: 10px;
+        
+        border-bottom: 2px solid #74AEE7;
+    }
+
+    &_number{
+        font-weight: bold;
+    }
+
+    &_total-price {
+        font-weight: bold;
+        color: #206EBC;
+    }
+
+
+}
