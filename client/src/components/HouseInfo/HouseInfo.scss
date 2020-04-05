@@ -1,0 +1,65 @@
+.house {
+    &_info {
+        display: none;
+        width: 300px;
+        border: 1px solid #206EBC;
+        border-radius: 30px;
+        padding: 15px 20px;
+        margin: 20px auto 0 auto;
+    }
+
+    &_text {
+        color: rgba(32, 110, 188, 0.8);
+        font-weight: bold;
+    }
+
+    &_type {
+        width: 136px;
+        height: 30px;
+        border: 1px solid #206EBC;
+        background-color: transparent;
+        border-radius: 50px;
+        outline: none;
+        padding-left: 36px;
+        appearance: none;
+        margin: 30px 0 0 20px;
+    
+    }
+
+    &_area {
+        width: 136px;
+        height: 30px;
+        border: 1px solid #206EBC;
+        background-color: transparent;
+        border-radius: 50px;
+        outline: none;
+        color: #206EBC;
+        padding-left: 20px;
+        margin: 30px 0 0 20px;
+    }
+
+    &_room {
+        width: 80px;
+        margin-top: 30px;
+    }
+
+    &_save {
+        display: block;
+        margin: 30px auto 0 auto;
+        width: 136px;
+        height: 30px;
+        border: 1px solid #206EBC;
+        background-color: transparent;
+        border-radius: 50px;
+        outline: none;
+        cursor: pointer;
+        
+    }
+
+    &_display{
+        display: block;
+    }
+
+}
+
+
