@@ -1,6 +1,10 @@
 ﻿const mongoose = require('mongoose');
 
 const SystemCounterSchema = new mongoose.Schema({
+    target: {
+        type: String,
+        default: 'system'
+    },
     count: {
         type: Number,
         default: 1000

@@ -44,11 +44,14 @@ router.post('/', [
 
         await user.save();
 
+        const counter = await SystemCounter.findOne({ target: 'order'});
         const cart = new Order ({
-            client: user.id
+            client: user.id,
+            number: counter.count
         })
-        
         await cart.save();
+        counter.count += 1;
+        await counter.save();
 
         const payload = {
             client: {

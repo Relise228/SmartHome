@@ -46,10 +46,14 @@ router.post('/confirm', auth, async (req, res) => {
         cart.status = 'Confirmed';
         await cart.save();
 
+        const counter = await SystemCounter.findOne({ target: 'order'});
         const newCart = new Order ({
-            client: req.client.id
+            client: req.client.id,
+            number: counter.count
         });
         await newCart.save();
+        counter.count += 1;
+        await counter.save();
 
         res.json(newCart);
     } catch(err) {
