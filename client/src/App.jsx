@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { ProductPage } from "./components/ProductPage";
 import { Authorization } from "./components/Authorization/Authorization";
 import { ProfilePage } from "./components/ProfilePage";
+import { Registration } from "./components/Registration/Registration";
 
 export class App extends React.Component {
     render() {
@@ -18,7 +19,8 @@ export class App extends React.Component {
                         <Route path='/smarthome/:productID' component={ProductPage} />
                         <Route path='/client/login' component={Authorization} />
                         <Route path='/client/profile' component={ProfilePage} />
-                        {/* <Redirect to='/404' /> */}
+                        <Route path='/client/signup' component={Registration} />
+                        <Redirect to='/404' />
                     </Switch>
                 <Footer/>
                 </BrowserRouter>
