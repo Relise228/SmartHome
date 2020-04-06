@@ -90,6 +90,12 @@
         padding-bottom: 58px;
     }
 
+    &_feedback {
+       
+        margin-top: 50px;
+        width: 100%;
+    }
+
 }
 .box_recomended {
     width: 100%;
@@ -105,4 +111,64 @@
     width: 100px;
     height: 86px;
     object-fit: cover;
+}
+
+.review {
+
+    color: #206EBC;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+
+
+    &_box {
+        margin-left: 135px;
+        margin-top: 15px;
+    }
+
+    &_header {
+        display: flex;
+        align-items: center;
+    }
+
+    &_name {
+        font-weight: bold;
+    }
+
+    &_body {
+        margin: 25px 0 0 20px;
+        max-width: 750px;
+    }
+
+    &_rating {
+        margin-left: 10px;
+    }
+
+    &_button {
+        display: block;
+        margin: 25px auto 0 auto;
+        width: 222px;
+        height: 56px;
+        border: 1px solid #74AEE7;
+        border-radius: 30px;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+        color: #206EBC;
+        font-weight: bold;
+    }
+    &_button:active {
+        background-color: #74AEE7;
+        color: #fff;
+    }
+
+}
+
+.blue_star {
+    color: #206EBC;
+    
+}
+
+.gray_star {
+   color: #C4C4C4;
 }
