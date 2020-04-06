@@ -1,0 +1,39 @@
+.cart {
+    
+
+    &_wrapper {
+        width: 926px;
+        border: 2px solid #74AEE7;
+        border-radius: 30px;
+        box-shadow: 5px 4px 5px rgba(116, 174, 231, 0.47);
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 27px 50px 27px 35px;
+    }
+
+    &_name {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #206EBC;
+        margin: 97px 0 53px 0;
+
+    }
+
+    &_total-price {
+        width: 926px;
+        text-align: right;
+        margin: 0 auto;
+        margin-top: 15px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #206EBC;
+    }
+}
+
+.sum {
+    font-size: 18px;
+    padding-right: 10px;
+}
+

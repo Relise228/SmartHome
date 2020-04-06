@@ -27,6 +27,7 @@
         box-shadow: 5px 4px 5px rgba(116, 174, 231, 0.47);
         padding: 0 30px 15px 30px;
         margin-top: 35px;
+        display: none;
 
     }
 
@@ -40,6 +41,7 @@
     &_order {
         width: 50%;
         max-width: 702px;
+        
     }
 
     &_user{
@@ -80,4 +82,8 @@
     }
 
   
+}
+
+.display {
+    display: block;
 }
