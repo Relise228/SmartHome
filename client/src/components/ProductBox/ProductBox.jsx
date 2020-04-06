@@ -23,7 +23,7 @@ export class ProductBox extends React.Component {
     render(){
         return (
             <div className="box">
-                <img className="productImage" src={this.state.image} />
+                <img className="productImage" src={this.state.image} alt={this.props.imageSrc}/>
                 <div className="productName"><Link to={this.state.productPage} >{this.props.productNameSrc}</Link></div>
                 <div className="productPrice">{this.props.priceSrc} грн</div>
                 <button className="buyButton" onClick={this.props.onClick}>

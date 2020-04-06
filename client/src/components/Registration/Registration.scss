@@ -1,0 +1,93 @@
+.reg {
+
+    &_wrapper {
+        max-width: 433px;
+        width: 100%;
+        height: 453px;
+        border: 2px solid #74AEE7;
+        border-radius: 30px;
+        margin: 88px auto 88px auto;
+        padding-top: 14px;
+    }
+
+    &_header {
+        color: #206EBC;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    &_form{
+        margin: 50px 44px 0 40px;
+    }
+
+    &_field {
+        margin-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &_field:first-child {
+        margin-top: 0px;
+        
+    }
+
+    &_text {
+        color: #74AEE7;
+        font-weight: bold;
+    }
+
+    &_input {
+        width: 247px;
+        height: 45px;
+        border: 1px solid #74AEE7;
+        border-radius: 30px;
+        outline: none;
+        padding: 0 20px 0 20px;
+        font-size: 16px;
+        color: #74AEE7;
+    }
+
+    &_phone-box {
+        color: #74AEE7;
+        font-weight: bold;
+    }
+
+    &_input-phone {
+        width: 212px;
+        height: 45px;
+        border: 1px solid #74AEE7;
+        border-radius: 30px;
+        outline: none;
+        padding: 0 20px 0 20px;
+        font-size: 16px;
+        color: #74AEE7;
+        
+    }
+
+    &_button {
+        width: 185px;
+        height: 45px;
+        border: 1px solid #74AEE7;
+        border-radius: 30px;
+        background-color: transparent;
+        display: block;
+        margin: 37px auto 0 auto;
+        outline: none;
+        cursor: pointer;
+        font-weight: bold;
+        color: #206EBC;
+    }
+
+    &_button:active {
+        background-color: #74AEE7;
+        color: #fff;
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
