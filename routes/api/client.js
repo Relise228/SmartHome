@@ -25,10 +25,15 @@ router.post('/', [
     const {name, password, telephoneNumber, email} = req.body;
 
     try {
-        let user = await Client.findOne({ email });
+        let user = await Client.findOne({ email : email });
 
         if (user) {
            return res.json({ errors: [{ msg: 'User already exists' }] });
+        }
+
+        user = await Client.findOne({ telephoneNumber: telephoneNumber});
+        if (user) {
+            return res.json({ errors: [{ msg: 'Telephone number is already used' }] });
         }
         
         user = new Client({
