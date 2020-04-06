@@ -7,6 +7,7 @@ const config = require('config');
 
 const Client = require('../../models/Client');
 const Order = require('../../models/Order');
+const SystemCounter = require('../../models/SystemCounter');
 
 // @route    POST api/clients
 // @desc     Add new client

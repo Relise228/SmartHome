@@ -5,6 +5,7 @@ const auth = require('../../middleware/auth');
 const Order = require('../../models/Order');
 const ProductInOrder = require('../../models/ProductInOrder');
 const SmartHomeSystem = require('../../models/SmartHomeSystem');
+const SystemCounter = require('../../models/SystemCounter');
 
 // @route    Get api/cart
 // @desc     Get user cart
