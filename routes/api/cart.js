@@ -153,14 +153,15 @@ router.post('/', auth, async (req, res) => {
                 quantity
             });
             await newSystemInCart.save();
-            const updatedCart = await Order.findOneAndUpdate({client : req.client.id, status : 'Cart'}, { $push: {products: newSystemInCart.id}})
+            const updatedCart = await Order.findOneAndUpdate({client : req.client.id, status : 'Cart'}, { $push: {products: newSystemInCart.id}});
+            const cart = await Order.findById(updatedCart.id)
             .populate({
                 path: 'products',
                 populate: { path: 'product' }
             });
-            updatedCart.totalPrice = calculateOrderPrice(updatedCart.products);
-            await updatedCart.save();
-            res.json(updatedCart);
+            cart.totalPrice = calculateOrderPrice(cart.products);
+            await cart.save();
+            res.json(cart);
         }
     } catch(err) {
         console.error(err.message);
