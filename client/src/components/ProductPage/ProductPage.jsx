@@ -14,7 +14,8 @@ export class ProductPage extends React.Component {
             manufacture: '',
             description: '',
             price: undefined,
-            recomendedGoods: []
+            recomendedGoods: [],
+            reviews: []
 
         }
 
@@ -67,7 +68,8 @@ export class ProductPage extends React.Component {
                 response.data.system.manufacture,
                 response.data.system.description,
                 response.data.system.price,
-                response.data.system.code);
+                response.data.system.code,
+                response.data.reviews);
             console.log(data);
           })
           .catch(function (error) {
@@ -78,9 +80,38 @@ export class ProductPage extends React.Component {
           });  
    }
 
-   setStates(images, title, manufacture, description, price, code){
-        this.setState({ images, code, title, manufacture, description, price });
+   setStates(images, title, manufacture, description, price, code, reviews){
+        this.setState({ images, code, title, manufacture, description, price, reviews });
         console.log(this.state.images);
+   }
+
+   returnStars(count) {
+        
+    let i = 0;
+    let starsNeed = 5;
+    let string = '';
+    let blackStars = '';
+        
+        while(i < count) {
+            string += ' ★ ';
+            i++;
+        };
+  
+        if(i !== starsNeed) {
+            let a = 0;
+            let d = starsNeed - i; 
+            while(a < d) {
+            blackStars += ' ★ ';
+            a++;
+            }; 
+        }
+
+        return(
+            <label>
+                <label className="blue_star">{string}</label>
+                <label className="gray_star">{blackStars}</label>
+            </label>
+        );
    }
 
 
@@ -110,7 +141,23 @@ export class ProductPage extends React.Component {
                             <p className="product_description">{this.state.description}</p>
                         </div>
                     </div>
-                    <div className="product_feedback"></div>
+                    <div className="product_feedback">
+                        <div className="review">Відгуки</div>
+                        {this.state.reviews.map(review => (
+                            <div className="review_box">
+                                <div className="review_header">
+                                    <div className="review_name">{review.client.name}</div>
+                                    <div className="review_rating">{this.returnStars(review.rating)}</div>
+                                </div>
+                                <div className="review_body">{review.text}</div>
+                            </div>
+                        ))}
+                    <button className="review_button">Залишити відгук</button>
+
+
+
+
+                    </div>
                     <div className="product_recomended">
                         <p className="product_recomended-header">Схожі товари</p>
                         <div className="box_recomended">
