@@ -64,6 +64,10 @@ export class Cart extends React.Component {
         this.setState({ totalPrice});
     }
 
+    confirmOrder() {
+        
+    }
+
     
 
     render() {
@@ -81,10 +85,9 @@ export class Cart extends React.Component {
                 </div>
 
                 <div className="cart_button-box">
-                    <button className="cart_button"></button>
+                    <button className="cart_button" onClick={this.confirmOrder}>Оформити</button>
                 </div>
-                
-                    
+        
             </div>
         )
     }

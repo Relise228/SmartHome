@@ -15,9 +15,13 @@ export class ProductPage extends React.Component {
             description: '',
             price: undefined,
             recomendedGoods: [],
-            reviews: []
+            reviews: [],
+            quantity: 1
 
         }
+
+        this.onChangeQuantity = this.onChangeQuantity.bind(this);
+        this.addProductInCart = this.addProductInCart.bind(this);
 
     }
 
@@ -114,6 +118,36 @@ export class ProductPage extends React.Component {
         );
    }
 
+   addProductInCart() {
+        const axios = require('axios');
+
+        this.data = {
+            systemId:this.state.productID,
+            quantity: this.state.quantity
+        }
+        console.log(this.data);
+
+        axios.post('http://localhost:5000/api/cart', this.data, {
+            headers: {
+                'x-auth-token': localStorage.token,
+                'Content-type': 'application/json'
+            }, 
+        }
+        )
+        .then( response => {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+   }
+
+   onChangeQuantity(e) {
+        const quantity = e.currentTarget.value; 
+       this.setState({ quantity });
+       console.log(quantity);
+   }
+
 
    
    
@@ -131,7 +165,8 @@ export class ProductPage extends React.Component {
                                 <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[3] } alt=""/>
                                 <div className="product_buy">
                                    <p className="product_price">{this.state.price + " грн"}</p>
-                                   <button className="product_buy-button">Купити</button>
+                                   <input type="number" value={this.state.quantity} onChange={this.onChangeQuantity} className="product_count"/>
+                                   <button className="product_buy-button" onClick={this.addProductInCart}>Купити</button>
                                 </div>
                             </div>
                         </div>

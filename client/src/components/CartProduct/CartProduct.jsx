@@ -28,7 +28,7 @@ export class CartProduct extends React.Component {
     componentDidMount() {
         let discount = this.state.discount/100;
         let total =  this.refPrice.current.outerText - (this.refPrice.current.outerText * discount);
-        this.props.setPrice(total);
+        this.props.setPrice(parseInt(this.refPrice.current.outerText));
     }
 
     removeProduct() {
@@ -47,6 +47,7 @@ export class CartProduct extends React.Component {
           )
           .then( response => {
             console.log(response);
+            window.location.reload();
           })
           .catch(function (error) {
             console.log(error);
@@ -95,7 +96,7 @@ export class CartProduct extends React.Component {
             let newValue = this.inputRef.current.value;
             this.setState({ quantity:  newValue});
 
-            this.sendQuantity();
+            this.sendQuantity(newValue);
 
             let discount = this.state.discount/100;
             let oneItemPrice = this.state.price - (this.state.price * discount);
@@ -114,6 +115,7 @@ export class CartProduct extends React.Component {
                 <div className="cart-product_info-wrapper">
                     <div className="cart-product_info_up">
                         <div className="cart-product_info_name"><Link to={this.state.productPage} className="cart-product_info_name">{this.props.product.product.title}</Link></div>
+                        <div className="discount">{'Знижка ' + this.state.discount + '%'}</div>
                         <div className="cart-product_info-remove" onClick={this.removeProduct}>✘</div>
                     </div>
                     <div className="cart-product_info_down">
@@ -124,7 +126,7 @@ export class CartProduct extends React.Component {
                             </div>
                             <div className="cart-product_info-count_minplu" onClick={this.plusCount}>+</div>
                         </div>
-                            <div className="cart-product_info_price" ref={this.refPrice}>{this.state.price * this.state.quantity}</div>
+                            <div className="cart-product_info_price" ref={this.refPrice}>{ (this.state.price - (this.state.price * (this.state.discount/100)))* this.state.quantity}</div>
                     </div>
                 </div>
             </div>

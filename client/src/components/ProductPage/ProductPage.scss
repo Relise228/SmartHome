@@ -33,14 +33,24 @@
 
     &_price {
         color: #206EBC;
-        font-size: 24px;
+        font-size:18px;
         font-weight: bold;
     }
 
+    &_count {
+        width: 50px;
+        height: 32px;
+        border: 1px solid #74AEE7;
+        border-radius: 30px;
+        margin: 0 10px;
+        outline: none;
+        text-align: center;
+    }
+
     &_buy-button {
-        width: 120px;
-        height: 56px;
-        font-size: 18px;
+        width: 80px;
+        height: 35px;
+        font-size: 14px;
         color: #206EBC;
         background-color: transparent;
         border: 1px solid #74AEE7;
@@ -143,6 +153,8 @@
     &_rating {
         margin-left: 10px;
     }
+
+   
 
     &_button {
         display: block;
