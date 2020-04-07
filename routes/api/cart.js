@@ -98,7 +98,7 @@ router.post('/delete', auth, async (req, res) => {
     try {
         const { productInOrderId } = req.body;
         
-        await ProductInOrder.findByIdAndDelete(productInOrderId, { quantity: quantity});
+        await ProductInOrder.findByIdAndDelete(productInOrderId);
 
         const cart = await Order.findOne({client : req.client.id, status : 'Cart'})
         .populate({
