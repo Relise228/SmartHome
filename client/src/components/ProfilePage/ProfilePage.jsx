@@ -113,9 +113,9 @@ export class ProfilePage extends React.Component {
                         Особистий кабінет
                     </p>
                     <div className="info_wrapper">
-                        <div className="info_order">
+                        <div className='info_order' >
                             <p className="info_text">Історія замовлень</p>
-                            <div className="info_order-wrapper">
+                            <div className={this.state.allOrders[0] ? "info_order-wrapper display" : "info_order-wrapper"}>
                                 {this.state.allOrders.map(order => (
                                     <OrderBox order={order} />
                                 ))}

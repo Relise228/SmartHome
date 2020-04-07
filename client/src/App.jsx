@@ -7,6 +7,7 @@ import { ProductPage } from "./components/ProductPage";
 import { Authorization } from "./components/Authorization/Authorization";
 import { ProfilePage } from "./components/ProfilePage";
 import { Registration } from "./components/Registration/Registration";
+import { Cart } from "./components/Cart/Cart";
 
 export class App extends React.Component {
     render() {
@@ -20,9 +21,10 @@ export class App extends React.Component {
                         <Route path='/client/login' component={Authorization} />
                         <Route path='/client/profile' component={ProfilePage} />
                         <Route path='/client/signup' component={Registration} />
+                        <Route path='/client/cart' component={Cart} />
                         <Redirect to='/404' />
                     </Switch>
-                <Footer/>
+                {/* <Footer/> */}
                 </BrowserRouter>
             </div>
         );
