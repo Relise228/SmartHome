@@ -17,11 +17,21 @@ export class ProductPage extends React.Component {
             recomendedGoods: [],
             reviews: [],
             quantity: 1
+           
 
         }
+        
+        this.areaBox = React.createRef();
+        this.area = React.createRef();
+        this.feedBackRef = React.createRef();
+        this.markRef = React.createRef();
 
         this.onChangeQuantity = this.onChangeQuantity.bind(this);
         this.addProductInCart = this.addProductInCart.bind(this);
+        this.leaveFeedBack = this.leaveFeedBack.bind(this);
+
+       
+
 
     }
 
@@ -29,6 +39,19 @@ export class ProductPage extends React.Component {
         this.fetchProduct();
         this.fetchRecomended();
         console.log(this.state.productID);
+
+
+
+
+
+        
+
+        if(localStorage.token) {
+
+        } else{
+            this.feedBackRef.current.style.display = "none";
+        }
+            
     }
     setRecomended(recomendedGoods) {
         this.setState({ recomendedGoods });
@@ -55,6 +78,8 @@ export class ProductPage extends React.Component {
           });  
 
     }
+
+    
    
    
    fetchProduct() {
@@ -148,6 +173,45 @@ export class ProductPage extends React.Component {
        console.log(quantity);
    }
 
+   leaveFeedBack() {
+       
+        this.areaBox.current.style.display = "block";
+        
+
+        if(this.area.current.value !== '') {
+
+            const axios = require('axios');
+            console.log(this.area.current.value + "\n" + this.markRef.current.value)
+            this.data = {
+               product: this.state.productID,
+               text: this.area.current.value,
+               rating: this.markRef.current.value
+            }
+
+            axios.post('http://localhost:5000/api/review', this.data, {
+                headers: {
+                    'x-auth-token': localStorage.token,
+                    'Content-type': 'application/json'
+                }
+            }
+            )
+            .then( response => {
+                console.log(response);
+                window.location.reload();  
+            })
+            .catch(function (error) {
+                console.log(error);
+            }); 
+        }
+
+        console.log(this.markRef.current.value)
+    
+   }
+
+  
+
+
+
 
    
    
@@ -187,7 +251,16 @@ export class ProductPage extends React.Component {
                                 <div className="review_body">{review.text}</div>
                             </div>
                         ))}
-                    <button className="review_button">Залишити відгук</button>
+                    <div className="feedback-area-box"  ref={this.areaBox}>
+                        Оцінка<select className="mark-select" ref={this.markRef}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <textarea className="feedback-area" ref={this.area}></textarea></div>
+                    <button className="review_button" ref={this.feedBackRef} onClick={this.leaveFeedBack}>Залишити відгук</button>
 
 
 
@@ -203,6 +276,7 @@ export class ProductPage extends React.Component {
                                 productNameSrc={good.title}
                                 priceSrc={good.price}
                                 id={good._id}
+                                history={this.props.history}
                             />
                             ))}
                         </div>

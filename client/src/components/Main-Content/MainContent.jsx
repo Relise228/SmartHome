@@ -28,6 +28,7 @@ export class MainContent extends React.Component {
             
             this.setGoods(data);
             console.log(this.state.goods);
+            this.setIsLoading();
             
           })
           .catch(function (error) {
@@ -36,6 +37,10 @@ export class MainContent extends React.Component {
           .then(function () {
             // always executed
           });  
+    }
+
+    setIsLoading (){
+      this.setState({isLoading: false});
     }
 
     componentDidMount() {
@@ -51,6 +56,10 @@ export class MainContent extends React.Component {
 
 
     render() {
+
+
+
+
         return(
             <div className="main_content">
                 <SortBar/>
@@ -61,6 +70,7 @@ export class MainContent extends React.Component {
                     productNameSrc={good.title}
                     priceSrc={good.price}
                     id={good._id}
+                    history={this.props.history}
                   />
                   ))}
               </div>
