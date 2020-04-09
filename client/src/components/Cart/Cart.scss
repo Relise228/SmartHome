@@ -49,10 +49,32 @@
         color: #fff;
         background-color: #206EBC;
     }
+
+    &_address-box {
+        width: 700px;
+        margin: 0 auto;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        color: #206EBC;
+        font-weight: bold;
+    }
+
+    &_input-address {
+        height: 30px;
+        width: 300px;
+        border: 1px solid #206EBC;
+        border-radius: 30px;
+        outline: none;
+        margin-left: 30px;
+        padding: 0 10px;
+        color: #206EBC;
+    }
 }
 
 .sum {
     font-size: 18px;
     padding-right: 10px;
+    
 }
 

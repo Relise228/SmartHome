@@ -11,11 +11,11 @@ export class ProductBox extends React.Component {
             image: `https://smarthomeproject.s3.eu-central-1.amazonaws.com/${this.props.id}/${this.props.imageSrc}`,
             productPage: `/smarthome/${this.props.id}`
         }
-        this.onCklick = this.onCklick.bind(this);
+        this.onClick = this.onClick.bind(this);
   
         
     }
-     onCklick() {
+     onClick() {
         
          this.props.history.push(this.state.productPage);
          window.location.reload();
@@ -30,7 +30,7 @@ export class ProductBox extends React.Component {
                 <img className="productImage" src={this.state.image} alt={this.props.imageSrc}/>
                 <div className="productName"><Link to={this.state.productPage} >{this.props.productNameSrc}</Link></div>
                 <div className="productPrice">{this.props.priceSrc} грн</div>
-                <button className="buyButton" onClick={this.onCklick}>
+                <button className="buyButton" onClick={this.onClick}>
                     Купити
                 </button>
             </div>

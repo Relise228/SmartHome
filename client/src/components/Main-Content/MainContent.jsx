@@ -28,7 +28,6 @@ export class MainContent extends React.Component {
             
             this.setGoods(data);
             console.log(this.state.goods);
-            this.setIsLoading();
             
           })
           .catch(function (error) {
@@ -39,9 +38,7 @@ export class MainContent extends React.Component {
           });  
     }
 
-    setIsLoading (){
-      this.setState({isLoading: false});
-    }
+    
 
     componentDidMount() {
       this.getProduct();
