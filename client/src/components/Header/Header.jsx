@@ -9,12 +9,12 @@ export class Header extends React.Component {
         this.state = {
             token: undefined,
         }
+
+        
     }
 
 
-    componentShouldUpdate(){
-       
-      }
+    
 
     render() {
         return(
@@ -29,7 +29,7 @@ export class Header extends React.Component {
                             <ul className = "menu_list">
                                 <li><Link to='/' className="link_menu">Встановлення системи</Link></li>
                                 <li><Link to={localStorage.token ?'/client/profile':'/client/login' } className="link_menu">Кабінет</Link></li>
-                                <li><Link to='/client/cart' className="link_menu">Корзина</Link></li>
+                                <li><Link to={localStorage.token ? '/client/cart' : '/client/login'} className="link_menu">Корзина</Link></li>
                             </ul>
                         </nav>
                     </div>

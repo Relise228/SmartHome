@@ -144,6 +144,8 @@ export class ProductPage extends React.Component {
    }
 
    addProductInCart() {
+
+    
         const axios = require('axios');
 
         this.data = {
