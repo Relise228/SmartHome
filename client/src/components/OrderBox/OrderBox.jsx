@@ -27,10 +27,7 @@ export class OrderBox extends React.Component {
     }
     
 
-    componentDidMount() {
-        console.log(this.state.status)
-    }
-
+   
     togleShortInfo() {
        if(this.state.longInfo === false)
             this.setState({ longInfo: true });
@@ -50,7 +47,7 @@ export class OrderBox extends React.Component {
                 </div>
                 <div className="order_full">
                     {this.props.order.products.map(product => (
-                        <OrderProduct product={product} longInfo={this.state.longInfo}/>
+                        <OrderProduct key={product._id} product={product} longInfo={this.state.longInfo}/>
                     ))}
                 </div>
             </div>

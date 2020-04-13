@@ -39,7 +39,6 @@ export class HouseInfo extends React.Component {
           }
           )
           .then( response => {
-              console.log(response);
               window.location.reload();
           })
           .catch(function (error) {

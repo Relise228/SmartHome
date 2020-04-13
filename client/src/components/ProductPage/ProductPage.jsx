@@ -29,23 +29,11 @@ export class ProductPage extends React.Component {
         this.onChangeQuantity = this.onChangeQuantity.bind(this);
         this.addProductInCart = this.addProductInCart.bind(this);
         this.leaveFeedBack = this.leaveFeedBack.bind(this);
-
-       
-
-
     }
 
     componentDidMount() {
         this.fetchProduct();
         this.fetchRecomended();
-        console.log(this.state.productID);
-
-
-
-
-
-        
-
         if(localStorage.token) {
 
         } else{
@@ -68,7 +56,7 @@ export class ProductPage extends React.Component {
           .then( response => {
             const data = response.data;
             this.setRecomended(data);
-            console.log(data);
+            
           })
           .catch(function (error) {
             console.log(error);
@@ -91,7 +79,6 @@ export class ProductPage extends React.Component {
             crossDomain: true
           })
           .then( response => {
-            const data = response.data;
             this.setStates(response.data.system.images,
                 response.data.system.title,
                 response.data.system.manufacture,
@@ -99,7 +86,6 @@ export class ProductPage extends React.Component {
                 response.data.system.price,
                 response.data.system.code,
                 response.data.reviews);
-            console.log(data);
           })
           .catch(function (error) {
             console.log(error);
@@ -111,7 +97,6 @@ export class ProductPage extends React.Component {
 
    setStates(images, title, manufacture, description, price, code, reviews){
         this.setState({ images, code, title, manufacture, description, price, reviews });
-        console.log(this.state.images);
    }
 
    returnStars(count) {
@@ -145,7 +130,7 @@ export class ProductPage extends React.Component {
 
    addProductInCart() {
 
-    
+     if(localStorage.token) {
         const axios = require('axios');
 
         this.data = {
@@ -167,6 +152,8 @@ export class ProductPage extends React.Component {
         .catch(function (error) {
             console.log(error);
         });
+
+    }
    }
 
    onChangeQuantity(e) {
@@ -206,17 +193,9 @@ export class ProductPage extends React.Component {
             }); 
         }
 
-        console.log(this.markRef.current.value)
     
    }
 
-  
-
-
-
-
-   
-   
    
     render() {
         return (
@@ -245,7 +224,7 @@ export class ProductPage extends React.Component {
                     <div className="product_feedback">
                         <div className="review">Відгуки</div>
                         {this.state.reviews.map(review => (
-                            <div className="review_box">
+                            <div key={review._id} className="review_box">
                                 <div className="review_header">
                                     <div className="review_name">{review.client.name}</div>
                                     <div className="review_rating">{this.returnStars(review.rating)}</div>
@@ -264,15 +243,13 @@ export class ProductPage extends React.Component {
                         <textarea className="feedback-area" ref={this.area}></textarea></div>
                     <button className="review_button" ref={this.feedBackRef} onClick={this.leaveFeedBack}>Залишити відгук</button>
 
-
-
-
                     </div>
                     <div className="product_recomended">
                         <p className="product_recomended-header">Схожі товари</p>
                         <div className="box_recomended">
                         {this.state.recomendedGoods.map(good => (
                             <ProductBox
+                                key={good._id}
                                 className="product_box"
                                 imageSrc={good.images[0]}
                                 productNameSrc={good.title}

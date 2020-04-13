@@ -27,7 +27,6 @@ export class MainContent extends React.Component {
             const data = response.data;
             
             this.setGoods(data);
-            console.log(this.state.goods);
             
           })
           .catch(function (error) {
@@ -63,6 +62,7 @@ export class MainContent extends React.Component {
               <div className="main_grid">
                   {this.state.goods.map(good => (
                   <ProductBox
+                    key={good._id}
                     imageSrc={good.images[0]}
                     productNameSrc={good.title}
                     priceSrc={good.price}

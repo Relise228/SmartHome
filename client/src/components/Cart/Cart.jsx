@@ -9,6 +9,7 @@ export class Cart extends React.Component {
             cartProducts: [],
             totalPrice: 0
         }
+        
         this.totalPrice = React.createRef();
         this.addressBox = React.createRef();
         this.addressInput = React.createRef();
@@ -37,7 +38,6 @@ export class Cart extends React.Component {
           }
           )
           .then( response => {
-            console.log(response); 
             this.setCartProducts(response.data.products);
           })
           .catch(function (error) {
@@ -114,8 +114,8 @@ export class Cart extends React.Component {
             <div className="wrapper">
                 <p className="cart_name">Корзина</p>
                 <div className="cart_wrapper">
-                    {this.state.cartProducts.map(product =>(
-                        <CartProduct product={product} setPrice={this.setTotalPrice} minusTotalPrice = {this.minusTotalPrice}/>
+                    {this.state.cartProducts.map(product =>(                 
+                        <CartProduct key={product._id}  product={product} setPrice={this.setTotalPrice} minusTotalPrice = {this.minusTotalPrice}/>
                     ))}
                 </div>
                 <div className="cart_total-price" >

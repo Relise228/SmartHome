@@ -26,8 +26,6 @@ export class CartProduct extends React.Component {
     }
 
     componentDidMount() {
-        let discount = this.state.discount/100;
-        let total =  this.refPrice.current.outerText - (this.refPrice.current.outerText * discount);
         this.props.setPrice(parseInt(this.refPrice.current.outerText));
     }
 
@@ -56,12 +54,11 @@ export class CartProduct extends React.Component {
 
     sendQuantity(value) {
         const axios = require('axios');
-        console.log(value)
         this.data = {
             productInOrderId: this.props.product._id,
             quantity: value 
         }
-        console.log(this.data);
+       
 
         axios.post('http://localhost:5000/api/cart/change', this.data, {
             headers: {
@@ -71,7 +68,7 @@ export class CartProduct extends React.Component {
           }
           )
           .then( response => {
-            console.log(response);
+           
           })
           .catch(function (error) {
             console.log(error);
@@ -102,7 +99,7 @@ export class CartProduct extends React.Component {
             let oneItemPrice = this.state.price - (this.state.price * discount);
             this.props.minusTotalPrice(oneItemPrice);
         } 
-        console.log(this.state.quantity);
+        
     ;  
     }
 
@@ -122,7 +119,7 @@ export class CartProduct extends React.Component {
                         <div className="cart-product_info-count_box">
                             <div className="cart-product_info-count_minplu" onClick={this.minusCount}>-</div>
                             <div className="cart-product_info-count_in">
-                                <input type="number" ref = {this.inputRef} value={this.state.quantity} className="cart-product_info-count_input"/>
+                                <input type="number" ref = {this.inputRef} defaultValue={this.state.quantity} className="cart-product_info-count_input"/>
                             </div>
                             <div className="cart-product_info-count_minplu" onClick={this.plusCount}>+</div>
                         </div>

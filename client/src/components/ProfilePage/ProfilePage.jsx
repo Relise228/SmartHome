@@ -19,12 +19,15 @@ export class ProfilePage extends React.Component {
         
         this.logOut = this.logOut.bind(this);
         this.onHouseDescriptionEdit = this.onHouseDescriptionEdit.bind(this);
+        
     }
 
     componentDidMount() {
         this.getUserInfo();
         this.getUserOrder();
     }
+ 
+
 
     getUserInfo() {
         const axios = require('axios');
@@ -36,8 +39,6 @@ export class ProfilePage extends React.Component {
           }
           )
           .then( response => {
-            console.log(localStorage.token);
-            console.log(response);
             this.setInfo(response.data.name,
                 response.data.telephoneNumber,
                 response.data.email);
@@ -59,7 +60,7 @@ export class ProfilePage extends React.Component {
           }
           )
           .then( response => {
-            console.log(response);
+            
             this.setAllOrders(response.data);
             
           })
@@ -76,6 +77,8 @@ export class ProfilePage extends React.Component {
     setInfo(name, telephoneNumber, email) {
         this.setState({name, telephoneNumber, email});
     }
+
+   
     
     logOut() {
         localStorage.removeItem("token");
@@ -83,16 +86,61 @@ export class ProfilePage extends React.Component {
         window.location.reload();
     }
 
-    onChangePIB() {
-
+    onChangePIB(value) {
+        const axios = require('axios');
+        
+        axios.post('http://localhost:5000/api/profile/pib', {name: value}, {
+            headers: {
+                'x-auth-token': localStorage.token,
+                'Content-type': 'application/json'
+            }
+          }
+          )
+          .then( response => {
+              console.log(response);
+              window.location.reload();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 
-    onChangePhone() {
-
+    onChangePhone(value) {
+        const axios = require('axios');
+        
+        axios.post('http://localhost:5000/api/profile/telephone', {telephoneNumber: value}, {
+            headers: {
+                'x-auth-token': localStorage.token,
+                'Content-type': 'application/json'
+            }
+          }
+          )
+          .then( response => {
+              console.log(response);
+              window.location.reload();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 
-    onChangeEmail() {
-
+    onChangeEmail(value) {
+        const axios = require('axios');
+        
+        axios.post('http://localhost:5000/api/profile/email', {email: value}, {
+            headers: {
+                'x-auth-token': localStorage.token,
+                'Content-type': 'application/json'
+            }
+          }
+          )
+          .then( response => {
+              console.log(response);
+              window.location.reload();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
     
     onHouseDescriptionEdit() {
@@ -117,7 +165,7 @@ export class ProfilePage extends React.Component {
                             <p className="info_text">Історія замовлень</p>
                             <div className={this.state.allOrders[0] ? "info_order-wrapper display" : "info_order-wrapper"}>
                                 {this.state.allOrders.map(order => (
-                                    <OrderBox order={order} />
+                                    <OrderBox key={order._id} order={order} />
                                 ))}
                             </div>
                         </div>
