@@ -21,6 +21,9 @@ const ServiceRequestSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+},
+{ 
+    versionKey: false 
 })
 
 module.exports = ServiceRequest = mongoose.model('serviceRequest', ServiceRequestSchema);

@@ -23,7 +23,14 @@ const ClientSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'home',
         required: false
+    },
+    type: {
+        type: String,
+        default: "User"
     }
+},
+{ 
+    versionKey: false 
 })
 
 module.exports = Client = mongoose.model('client', ClientSchema);

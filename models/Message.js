@@ -25,6 +25,9 @@ const MessageSchema = new mongoose.Schema({
         type: String,
         default: 'Не прочитано'
     }
+},
+{ 
+    versionKey: false 
 })
 
 module.exports = Message = mongoose.model('message', MessageSchema);

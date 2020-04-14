@@ -31,6 +31,9 @@ const EmployeeSchema = new mongoose.Schema({
         required: true,
         unique: true
     }
+},
+{ 
+    versionKey: false 
 })
 
 module.exports = Employee = mongoose.model('employee', EmployeeSchema);

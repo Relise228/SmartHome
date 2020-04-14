@@ -17,6 +17,9 @@ const DeliveryRequestSchema = new mongoose.Schema({
         type: Date,
         required: false
     }
+},
+{ 
+    versionKey: false 
 })
 
 module.exports = DeliveryRequest = mongoose.model('deliveryRequest', DeliveryRequestSchema);

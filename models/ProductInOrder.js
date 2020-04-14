@@ -10,6 +10,9 @@ const ProductInOrderSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
+},
+{ 
+    versionKey: false 
 })
 
 module.exports = ProductInOrder = mongoose.model('productInOrder', ProductInOrderSchema);

@@ -46,7 +46,14 @@ const SmartHomeSystemSchema = new mongoose.Schema({
     discount: {
         type: Number,
         default: 0
+    },
+    status: {
+        type: String,
+        default: "Visible"
     }
+},
+{ 
+    versionKey: false 
 })
 
 module.exports = SmartHomeSystem = mongoose.model('smartHomeSystem', SmartHomeSystemSchema);
