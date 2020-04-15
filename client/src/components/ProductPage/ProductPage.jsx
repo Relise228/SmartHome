@@ -409,19 +409,19 @@ onChangeDiscount(e) {
                                 <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[1] } alt=""/>
                                 <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[2] } alt=""/>
                                 <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[3] } alt=""/>
-                                <div className="product_buy">
+                                {this.state.stock !== 0 ? <div className="product_buy">
                                    {this.state.priceChange ? <input className="edit_input" type="text" onChange={this.onChangePrice} value={this.state.price}/> : <p className="product_price" onDoubleClickCapture={this.setPriceChange}>{Math.floor(this.state.price - (this.state.price * (this.state.discount/100))) + " грн"}</p>}
                                    <input type="number" value={this.state.quantity} onChange={this.onChangeQuantity} className="product_count"/>
                                    <button className="product_buy-button" onClick={this.addProductInCart}>Купити</button>
-                                </div>
+                                </div> : ''}
                                 {this.state.priceChange ? <button className="button-save" onClick={this.saveChangedPrice}>Зберегти</button> : ''}
                             </div>
                         </div>
                         <div className="product_info">
                         { this.state.nameChange ? <input className="edit_input" onChange={this.onChangeTitle} type="text" value={this.state.title}/> : <h2 className="product_name" onDoubleClickCapture={this.setTitleChange}>{this.state.title}</h2>}
                             <p className='product_code'>{"Код товару: " + this.state.code}</p>
-                            { this.state.stockChange ? <input className="edit_input" onChange={this.onChangeStock} type="text" value={this.state.stock}/> : <p onDoubleClickCapture={this.setStockChange}>{'У наявності: ' + this.state.stock}</p>}
-                            { this.state.discountChange ? <input className="edit_input" onChange={this.onChangeDiscount} type="text" value={this.state.discount}/> : <p onDoubleClickCapture={this.setDiscountChange}>{'Знижка: ' + this.state.discount + '%'}</p>}
+                            { this.state.stockChange ? <input className="edit_input" onChange={this.onChangeStock} type="text" value={this.state.stock}/> : <p className="stock" onDoubleClickCapture={this.setStockChange}>{'У наявності: ' + this.state.stock}</p>}
+                            { this.state.discountChange ? <input className="edit_input" onChange={this.onChangeDiscount} type="text" value={this.state.discount}/> : <p className="discount_" onDoubleClickCapture={this.setDiscountChange}>{'Знижка: ' + this.state.discount + '%'}</p>}
                             { this.state.nameChange || this.state.stockChange || this.state.discountChange ? <button className="button-save" onClick={this.saveNameStockDiscount}>Зберегти</button> : ''}
                             { this.state.descriptionChange ? <textarea className="edit_area" onChange={this.onChangeDescription} value={this.state.description}></textarea> : <p onDoubleClickCapture={this.setDescriptionChange} className="product_description">{this.state.description}</p>}
                             

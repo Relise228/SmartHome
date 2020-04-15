@@ -128,7 +128,7 @@ export class Cart extends React.Component {
                         <label>Введіть адресу: </label>
                         <input type="text" className="cart_input-address" ref={this.addressInput}/>
                     </div>
-                    <button className="cart_button" onClick={this.confirmOrder}>Оформити</button>
+                   {this.state.totalPrice !== 0 ? <button className="cart_button" onClick={this.confirmOrder}>Оформити</button> : ''}
                 </div>
         
             </div>
