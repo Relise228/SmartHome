@@ -29,7 +29,7 @@ export class ProductBox extends React.Component {
             <div className="box">
                 <img className="productImage" src={this.state.image} alt={this.props.imageSrc}/>
                 <div className="productName"><Link to={this.state.productPage} >{this.props.productNameSrc}</Link></div>
-                <div className="productPrice">{this.props.priceSrc} грн</div>
+                <div className="productPrice">{Math.floor(this.props.priceSrc - (this.props.priceSrc * (this.props.discount/100))) + " грн"}</div>
                 <button className="buyButton" onClick={this.onClick}>
                     Купити
                 </button>

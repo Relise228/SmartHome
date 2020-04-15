@@ -8,6 +8,7 @@ import { Authorization } from "./components/Authorization/Authorization";
 import { ProfilePage } from "./components/ProfilePage";
 import { Registration } from "./components/Registration/Registration";
 import { Cart } from "./components/Cart/Cart";
+import { AdminPanel } from "./components/AdminPanel/AdminPanel";
 
 export class App extends React.Component {
     render() {
@@ -22,6 +23,7 @@ export class App extends React.Component {
                         <Route path='/client/profile' component={ProfilePage} />
                         <Route path='/client/signup' component={Registration} />
                         <Route path='/client/cart' component={Cart} />
+                        <Route path='/admin' component={AdminPanel} />
                         <Redirect to='/404' />
                     </Switch>
                 {/* <Footer/> */}

@@ -211,3 +211,37 @@
     border-radius: 30px;
     outline: none;
 }
+
+.button-save {
+    display: block;
+        margin-left: 10px;
+        margin-top: 10px;
+        width: 110px;
+        height: 35px;
+        border: 1px solid #74AEE7;
+        border-radius: 30px;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+        color: #206EBC;
+        font-weight: bold;
+}
+
+.edit_input {
+    padding: 5px;
+    border: 1px solid #74AEE7;
+    border-radius: 30px;
+    display: block;
+    outline: none;
+}
+
+.edit_area {
+    width: 575px;
+    resize: none;
+    height: 300px;
+    border: 1px solid #74AEE7;
+    border-radius: 30px;
+    padding: 10px;
+    outline: none;
+
+}

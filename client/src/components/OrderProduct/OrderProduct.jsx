@@ -12,6 +12,7 @@ export class OrderProduct extends React.Component {
             title: this.props.product.product.title,
             price: this.props.product.product.price,
             id: this.props.product.product._id,
+            discount: this.props.product.product.discount,
             productPage: `/smarthome/${this.props.product.product._id}`
         }
     }
@@ -29,7 +30,7 @@ export class OrderProduct extends React.Component {
                     <div className="order-product_title"><Link to={this.state.productPage} className="order-product_title">{this.state.title}</Link></div>
                     <div className="order-product_qp">
                         <div className="order-product_quantity">{"Кількість: " + this.state.quantity}</div>
-                        <div className="order-product_price">{this.state.price + " грн"}</div>
+                        <div className="order-product_price">{(Math.floor(this.state.price - (this.state.price * (this.state.discount/100))) * this.state.quantity) + " грн"}</div>
                     </div>
                </div>
                 

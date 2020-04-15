@@ -42,6 +42,12 @@ export class ProfilePage extends React.Component {
             this.setInfo(response.data.name,
                 response.data.telephoneNumber,
                 response.data.email);
+                
+
+                if(response.data.type === 'Admin') {
+                    localStorage.setItem("admin", true);
+                }
+                console.log(localStorage.admin);
 
           })
           .catch(function (error) {
@@ -82,6 +88,7 @@ export class ProfilePage extends React.Component {
     
     logOut() {
         localStorage.removeItem("token");
+        localStorage.removeItem("admin");
         this.props.history.push('/');
         window.location.reload();
     }

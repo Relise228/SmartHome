@@ -16,9 +16,15 @@ export class ProductPage extends React.Component {
             price: undefined,
             recomendedGoods: [],
             reviews: [],
-            quantity: 1
-           
-
+            stock: 1,
+            quantity: 1,
+            discount: 0,
+            priceChange: false,
+            nameChange: false,
+            stockChange: false,
+            descriptionChange: false,
+            imageChange: false,
+            discountChange: false
         }
         
         this.areaBox = React.createRef();
@@ -27,8 +33,28 @@ export class ProductPage extends React.Component {
         this.markRef = React.createRef();
 
         this.onChangeQuantity = this.onChangeQuantity.bind(this);
+        
         this.addProductInCart = this.addProductInCart.bind(this);
+        
         this.leaveFeedBack = this.leaveFeedBack.bind(this);
+        
+        this.setPriceChange = this.setPriceChange.bind(this);
+        this.onChangePrice = this.onChangePrice.bind(this);
+        this.saveChangedPrice = this.saveChangedPrice.bind(this);
+        
+        this.setTitleChange = this.setTitleChange.bind(this);
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.saveNameStockDiscount = this.saveNameStockDiscount.bind(this);
+
+        this.setStockChange = this.setStockChange.bind(this);
+        this.onChangeStock = this.onChangeStock.bind(this);
+
+        this.setDescriptionChange = this.setDescriptionChange.bind(this);
+        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.saveDescription = this.saveDescription.bind(this);
+
+        this.setDiscountChange = this.setDiscountChange.bind(this);
+        this.onChangeDiscount = this.onChangeDiscount.bind(this);
     }
 
     componentDidMount() {
@@ -67,9 +93,6 @@ export class ProductPage extends React.Component {
 
     }
 
-    
-   
-   
    fetchProduct() {
     const axios = require('axios');
         axios.get(`http://localhost:5000/api/goods/${this.state.productID}`, {
@@ -85,7 +108,10 @@ export class ProductPage extends React.Component {
                 response.data.system.description,
                 response.data.system.price,
                 response.data.system.code,
-                response.data.reviews);
+                response.data.reviews,
+                response.data.system.quantity,
+                response.data.system.discount);
+                console.log(response);
           })
           .catch(function (error) {
             console.log(error);
@@ -95,8 +121,8 @@ export class ProductPage extends React.Component {
           });  
    }
 
-   setStates(images, title, manufacture, description, price, code, reviews){
-        this.setState({ images, code, title, manufacture, description, price, reviews });
+   setStates(images, title, manufacture, description, price, code, reviews, stock, discount){
+        this.setState({ images, code, title, manufacture, description, price, reviews, stock, discount });
    }
 
    returnStars(count) {
@@ -196,6 +222,181 @@ export class ProductPage extends React.Component {
     
    }
 
+   onChangePrice(e) {
+        const value = e.currentTarget.value;
+        this.setState({price: value});
+   }
+
+   setPriceChange() {
+       if(localStorage.admin)
+         this.setState({priceChange: true});
+   }
+
+   saveChangedPrice() {
+    const axios = require('axios');
+        
+    this.data = {
+        systemId: this.state.productID,
+        price: this.state.price
+    }
+
+    axios.post('http://localhost:5000/api/admin/system/price', this.data, {
+        headers: {
+            'x-auth-token': localStorage.token,
+            'Content-type': 'application/json'
+        }
+      }
+      )
+      .then( response => {
+          console.log(response);
+          this.setState({priceChange: false});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+   }
+
+   setTitleChange() {
+    if(localStorage.admin)
+        this.setState({nameChange: true});
+   }
+
+   onChangeTitle(e) {
+    const value = e.currentTarget.value;
+    this.setState({title: value});
+}
+
+saveNameStockDiscount() {
+    const axios = require('axios');
+    if(this.state.nameChange) {
+        
+        
+    this.data = {
+        systemId: this.state.productID,
+        title: this.state.title
+    }
+
+    axios.post('http://localhost:5000/api/admin/system/title', this.data, {
+        headers: {
+            'x-auth-token': localStorage.token,
+            'Content-type': 'application/json'
+        }
+      }
+      )
+      .then( response => {
+          console.log(response);
+          this.setState({nameChange: false});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    } 
+    if (this.state.stockChange) {
+        
+    this.data = {
+        systemId: this.state.productID,
+        quantity: this.state.stock
+    }
+
+    axios.post('http://localhost:5000/api/admin/system/quantity', this.data, {
+        headers: {
+            'x-auth-token': localStorage.token,
+            'Content-type': 'application/json'
+        }
+      }
+      )
+      .then( response => {
+          console.log(response);
+          this.setState({stockChange: false});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+
+    if (this.state.discountChange) {
+        
+        this.data = {
+            systemId: this.state.productID,
+            discount: this.state.discount
+        }
+    
+        axios.post('http://localhost:5000/api/admin/system/discount', this.data, {
+            headers: {
+                'x-auth-token': localStorage.token,
+                'Content-type': 'application/json'
+            }
+          }
+          )
+          .then( response => {
+              console.log(response);
+              this.setState({discountChange: false});
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        }
+}
+
+setStockChange() {
+    if(localStorage.admin)
+        this.setState({stockChange: true});
+}
+
+onChangeStock(e) {
+    const value = e.currentTarget.value;
+    this.setState({stock: value});
+}
+
+setDescriptionChange() {
+    if(localStorage.admin)
+        this.setState({descriptionChange: true});
+        
+
+}
+
+onChangeDescription(e) {
+    const value = e.currentTarget.value;
+    this.setState({description: value});
+}
+
+saveDescription() {
+    const axios = require('axios');
+  
+    this.data = {
+        systemId: this.state.productID,
+        description: this.state.description
+    }
+
+    axios.post('http://localhost:5000/api/admin/system/description', this.data, {
+        headers: {
+            'x-auth-token': localStorage.token,
+            'Content-type': 'application/json'
+        }
+      }
+      )
+      .then( response => {
+          console.log(response);
+          this.setState({descriptionChange: false});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+}
+
+setDiscountChange() {
+    console.log('ok');
+    if(localStorage.admin)
+
+        this.setState({discountChange: true});
+        
+}
+
+onChangeDiscount(e) {
+    const value = e.currentTarget.value;
+    this.setState({discount: value});
+}
+
    
     render() {
         return (
@@ -209,17 +410,24 @@ export class ProductPage extends React.Component {
                                 <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[2] } alt=""/>
                                 <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[3] } alt=""/>
                                 <div className="product_buy">
-                                   <p className="product_price">{this.state.price + " грн"}</p>
+                                   {this.state.priceChange ? <input className="edit_input" type="text" onChange={this.onChangePrice} value={this.state.price}/> : <p className="product_price" onDoubleClickCapture={this.setPriceChange}>{Math.floor(this.state.price - (this.state.price * (this.state.discount/100))) + " грн"}</p>}
                                    <input type="number" value={this.state.quantity} onChange={this.onChangeQuantity} className="product_count"/>
                                    <button className="product_buy-button" onClick={this.addProductInCart}>Купити</button>
                                 </div>
+                                {this.state.priceChange ? <button className="button-save" onClick={this.saveChangedPrice}>Зберегти</button> : ''}
                             </div>
                         </div>
                         <div className="product_info">
-                            <h2 className="product_name">{this.state.title}</h2>
+                        { this.state.nameChange ? <input className="edit_input" onChange={this.onChangeTitle} type="text" value={this.state.title}/> : <h2 className="product_name" onDoubleClickCapture={this.setTitleChange}>{this.state.title}</h2>}
                             <p className='product_code'>{"Код товару: " + this.state.code}</p>
-                            <p className="product_description">{this.state.description}</p>
+                            { this.state.stockChange ? <input className="edit_input" onChange={this.onChangeStock} type="text" value={this.state.stock}/> : <p onDoubleClickCapture={this.setStockChange}>{'У наявності: ' + this.state.stock}</p>}
+                            { this.state.discountChange ? <input className="edit_input" onChange={this.onChangeDiscount} type="text" value={this.state.discount}/> : <p onDoubleClickCapture={this.setDiscountChange}>{'Знижка: ' + this.state.discount + '%'}</p>}
+                            { this.state.nameChange || this.state.stockChange || this.state.discountChange ? <button className="button-save" onClick={this.saveNameStockDiscount}>Зберегти</button> : ''}
+                            { this.state.descriptionChange ? <textarea className="edit_area" onChange={this.onChangeDescription} value={this.state.description}></textarea> : <p onDoubleClickCapture={this.setDescriptionChange} className="product_description">{this.state.description}</p>}
+                            
+                            { this.state.descriptionChange ? <button className="button-save" onClick={this.saveDescription}>Зберегти</button> : ''}
                         </div>
+        
                     </div>
                     <div className="product_feedback">
                         <div className="review">Відгуки</div>
@@ -256,6 +464,7 @@ export class ProductPage extends React.Component {
                                 priceSrc={good.price}
                                 id={good._id}
                                 history={this.props.history}
+                                discount={good.discount}
                             />
                             ))}
                         </div>

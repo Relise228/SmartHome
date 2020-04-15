@@ -58,7 +58,7 @@ export class MainContent extends React.Component {
 
         return(
             <div className="main_content">
-                <SortBar/>
+                <SortBar history={this.props.history}/>
               <div className="main_grid">
                   {this.state.goods.map(good => (
                   <ProductBox
@@ -68,6 +68,7 @@ export class MainContent extends React.Component {
                     priceSrc={good.price}
                     id={good._id}
                     history={this.props.history}
+                    discount={good.discount}
                   />
                   ))}
               </div>

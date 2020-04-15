@@ -52,19 +52,19 @@ export class Cart extends React.Component {
     }
 
     setTotalPrice(price) {
-        this.total += price;
+        this.total += Math.floor(price);
         this.totalPrice.current.innerText = ` ${this.total}`;
-        this.setPrice(this.total);
+        this.setPrice(Math.floor(this.total));
     }
 
     minusTotalPrice(price) {
-        this.total -= price;
+        this.total -= Math.floor(price);
         this.totalPrice.current.innerText = ` ${this.total}` ;
-        this.setPrice(this.total);
+        this.setPrice(Math.floor(this.total));
     }
 
     setPrice(totalPrice) {
-        this.setState({ totalPrice});
+        this.setState({ totalPrice: Math.floor(totalPrice)});
     }
 
     confirmOrder() {
@@ -114,7 +114,7 @@ export class Cart extends React.Component {
             <div className="wrapper">
                 <p className="cart_name">Корзина</p>
                 <div className="cart_wrapper">
-                    {this.state.cartProducts.map(product =>(                 
+                    {this.state.cartProducts.map(product =>(                
                         <CartProduct key={product._id}  product={product} setPrice={this.setTotalPrice} minusTotalPrice = {this.minusTotalPrice}/>
                     ))}
                 </div>

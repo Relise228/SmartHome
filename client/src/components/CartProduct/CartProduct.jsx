@@ -123,7 +123,7 @@ export class CartProduct extends React.Component {
                             </div>
                             <div className="cart-product_info-count_minplu" onClick={this.plusCount}>+</div>
                         </div>
-                            <div className="cart-product_info_price" ref={this.refPrice}>{ (this.state.price - (this.state.price * (this.state.discount/100)))* this.state.quantity}</div>
+                            <div className="cart-product_info_price" ref={this.refPrice}>{ Math.floor(this.state.price - (this.state.price * (this.state.discount/100)))* this.state.quantity}</div>
                     </div>
                 </div>
             </div>
