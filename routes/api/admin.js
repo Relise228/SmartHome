@@ -265,10 +265,7 @@ router.get('/orders/:number', auth, async (req, res) => {
     try {
         const order = await Order.findOne({ number: req.params.number })
         .populate('client', '-password')
-        .populate({
-            path: 'products',
-            populate: { path: 'product' }
-        })
+        .populate('products')
         .sort('date');
         res.json(order);
     } catch(err) {
