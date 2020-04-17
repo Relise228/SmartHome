@@ -138,8 +138,7 @@ router.post('/', auth, async (req, res) => {
         }
         const systemInCart = cart.products.find(system => system.product.id == systemId);
         if (systemInCart) {
-            const updatedSystemInCart = await ProductInOrder.findByIdAndUpdate(systemInCart.id, { quantity: systemInCart.quantity + quantity});
-            console.log(updatedSystemInCart);
+            const updatedSystemInCart = await ProductInOrder.findByIdAndUpdate(systemInCart.id, { quantity: parseInt(systemInCart.quantity) + parseInt(quantity)});
             const cart = await Order.findOne({client : req.client.id, status : 'Cart'})
             .populate({
                 path: 'products',

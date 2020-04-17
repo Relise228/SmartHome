@@ -215,7 +215,10 @@ router.post('/system/quantity', auth, async (req, res) => {
 // @access   Private
 router.get('/orders/confirmed', auth, async (req, res) => {
     try {
-        const orders = await Order.find({ status: 'Confirmed' }).populate('client', '-password').sort('date');
+        const orders = await Order.find({ status: 'Confirmed' })
+        .populate('client', '-password')
+        .populate('products')
+        .sort('date');
         res.json(orders);
     } catch(err) {
         console.error(err.message);
@@ -224,11 +227,14 @@ router.get('/orders/confirmed', auth, async (req, res) => {
 });
 
 // @route    GET api/admin/orders/delivery
-// @desc     Get all confirmed orders
+// @desc     Get all delivery orders
 // @access   Private
 router.get('/orders/delivery', auth, async (req, res) => {
     try {
-        const orders = await Order.find({ status: 'In delivery' }).populate('client', '-password').sort('date');
+        const orders = await Order.find({ status: 'In delivery' })
+        .populate('client', '-password')
+        .populate('products')
+        .sort('date');
         res.json(orders);
     } catch(err) {
         console.error(err.message);
@@ -241,7 +247,10 @@ router.get('/orders/delivery', auth, async (req, res) => {
 // @access   Private
 router.get('/orders/finished', auth, async (req, res) => {
     try {
-        const orders = await Order.find({ status: 'Finished' }).populate('client').sort('date');
+        const orders = await Order.find({ status: 'Finished' })
+        .populate('client')
+        .populate('products')
+        .sort('date');
         res.json(orders);
     } catch(err) {
         console.error(err.message);
