@@ -1,0 +1,32 @@
+.abar {
+
+    width: 100%;
+    max-width: 300px;
+    max-height: 304px;
+    
+    
+    border: 2px solid #0803F3;
+    border-radius: 30px;
+    box-shadow: 5px 4px 5px rgba(8, 3, 243, 0.51);
+
+
+
+
+    &_button {
+        width: 100%;
+        padding: 30px;
+        border-radius: 30px;
+        border: none;
+        background-color: transparent;
+        color: #6260E5;
+        font-weight: bold;
+        outline: none;
+        cursor: pointer;
+    }
+
+    &_button:hover {
+        background-color: #6260E5;
+        color: #fff;
+
+    }
+}

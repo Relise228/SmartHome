@@ -1,0 +1,74 @@
+.aorder {
+    width: 100%;
+
+    &_info {
+        width: 100%;
+        height: 30px;
+        margin-top: 10px;
+        border-radius: 30px;
+        padding: 0 5px 0 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: #0803F3;
+        box-shadow: 0px 4px 4px rgba(8, 3, 243, 0.51);
+        cursor: pointer;
+
+    }
+
+    &_number {
+        width: 25%;
+        text-align: center;
+        font-weight: bold;
+    }
+
+   
+    &_date {
+        width: 25%;
+        text-align: center;
+    }
+
+    &_status {
+        width: 25%;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    &_price {
+        width: 25%;
+        text-align: center;
+        font-weight: bold;
+        color: #3C1FB4;
+    }
+
+    &_client {
+        display: flex;
+        margin-top: 10px;
+        width: 100%;
+        border: 1px solid #0803F3;
+        border-radius: 30px;
+        padding: 8px 11px;
+    }
+    &_client > div {
+        width: 33.33%;
+        text-align: center;
+    }
+}
+
+.button-toDelivery {
+    border: 1px solid rgba(8, 3, 243, 0.51);
+    border-radius: 30px;
+    height: 45px;
+    width: 100%;
+    background-color: transparent;
+    font-weight: bold;
+    outline: none;
+    color: rgba(8, 3, 243, 0.51);
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.button-toDelivery:hover {
+    background-color: rgba(8, 3, 243, 0.51);
+    color: #fff;
+}
