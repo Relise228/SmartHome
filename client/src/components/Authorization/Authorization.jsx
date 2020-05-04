@@ -74,9 +74,12 @@ export class Authorization extends React.Component {
                    <p className="auth_text">
                        Авторизація
                    </p>
+                   {this.state.error == "Invalid Credentials" ? <p className="registration_error">{this.state.error}</p>: ''}
                    <form className="auth_form"  onSubmit={this.onSubmitForm}>
                        <label htmlFor="" className="auth_input-text ">E-mail</label><input onChange={this.setLogin} className="auth_input input_text" type="text" name="" id=""/><br/>
+                        {this.state.error == "Please enter a valid email" ? <p className="registration_error">{this.state.error}</p>: ''}
                        <label htmlFor="" className="auth_input-text">Пароль</label><input onChange={this.setPassword} className="auth_input" type="password" name="" id=""/>
+                       {this.state.error == "Password is required" ? <p className="registration_error">{this.state.error}</p>: ''}
                        <p className="registration_text">Якщо у вас немає акаунту<br/>натисніть <Link to='/client/signup'>сюди</Link></p>
                        <button className="auth_button">Вхід</button>
                    </form>

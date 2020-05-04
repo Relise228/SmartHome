@@ -21,7 +21,9 @@ export class AdminOrder extends React.Component {
         this.state = {
             date: this.props.order.date,
             products: [],
-            longInfo: false
+            longInfo: false,
+            quantity: 0,
+          
         }
 
         this.dateSTR = new Date(this.state.date);
@@ -29,11 +31,14 @@ export class AdminOrder extends React.Component {
         this.togleShortInfo = this.togleShortInfo.bind(this);
 
         this.toDelivery = this.toDelivery.bind(this);
+
+        this.setQuantity = this.setQuantity.bind(this);
         
         
     }
 
     componentDidMount() {
+        console.log(this.props.order);
         this.fetchProducts();
     }
 
@@ -48,6 +53,7 @@ export class AdminOrder extends React.Component {
             crossDomain: true
           })
           .then( response => {
+              
             
             const products = this.state.products.concat(response);
             this.setProducts(products);
@@ -57,10 +63,19 @@ export class AdminOrder extends React.Component {
           })
           .catch(function (error) {
             console.log(error);
-          });  
+          });
+          this.setQuantity(product.quantity);  
          });
 
+
+
+    
+
          
+    }
+
+    setQuantity(quantity) {
+        this.setState({ quantity });
     }
 
         setProducts(products) {
@@ -133,7 +148,7 @@ export class AdminOrder extends React.Component {
                     <div className="aorder_products">
 
                         {this.state.products.map(product => (
-                            <AdminProduct  key={product.data.system._id} product={product.data.system} longInfo={this.state.longInfo}/>
+                            <AdminProduct  quantity={this.state.quantity} key={product.data.system._id} product={product.data.system} longInfo={this.state.longInfo}/>
                         ))}
                     </div>
                     {this.props.buttonToDelivery ? <button className="button-toDelivery" onClick={this.toDelivery}>To delivery</button> : ''}

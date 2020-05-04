@@ -29,8 +29,8 @@ export class AdminProduct extends React.Component {
                <div className="order-product_info">
                     <div className="order-product_title"><Link to={this.state.productPage} className="order-product_title">{this.state.title}</Link></div>
                     <div className="order-product_qp">
-                        <div className="order-product_quantity">{"Кількість: " + this.state.quantity}</div>
-                        <div className="order-product_price">{(Math.floor(this.state.price - (this.state.price * (this.state.discount/100))) * this.state.quantity) + " грн"}</div>
+                        <div className="order-product_quantity">{"Кількість: " + this.props.quantity}</div>
+                        <div className="order-product_price">{(Math.floor(this.state.price - (this.state.price * (this.state.discount/100))) * this.props.quantity) + " грн"}</div>
                     </div>
                </div>
                 

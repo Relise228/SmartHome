@@ -68,6 +68,8 @@ export class ProfilePage extends React.Component {
           .then( response => {
             
             this.setAllOrders(response.data);
+
+            console.log(this.state.allOrders);
             
           })
           .catch(function (error) {
