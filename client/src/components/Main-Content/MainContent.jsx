@@ -15,8 +15,17 @@ export class MainContent extends React.Component {
 
 
      getProduct() {
+       let query;
+        if(this.props.location.search != '?' && this.props.location.search != '') {
+          console.log(true);
+          query = this.props.location.search;
+         console.log(query);
+          
+        }
+
+
         const axios = require('axios');
-        axios.get('http://localhost:5000/api/goods/', {
+        axios.get (query != undefined ? 'http://localhost:5000/api/goods/' + query : 'http://localhost:5000/api/goods/', {
             headers: {
                 'Content-type': 'application/json'
             },
@@ -25,7 +34,7 @@ export class MainContent extends React.Component {
           .then( response => {
            
             const data = response.data;
-            
+            console.log(response)
             this.setGoods(data);
             
           })
@@ -58,7 +67,7 @@ export class MainContent extends React.Component {
 
         return(
             <div className="main_content">
-                <SortBar history={this.props.history}/>
+                <SortBar history={this.props.history} location={this.props.location}/>
               <div className="main_grid">
                   {this.state.goods.map(good => (
                   <ProductBox

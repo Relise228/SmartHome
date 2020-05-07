@@ -17,14 +17,15 @@ export class App extends React.Component {
                 <BrowserRouter>
                 <Header/>
                     <Switch>
-                        <Route exact={true} path='/' component={Main} />
+                        <Route  exact={true} path='/' component={Main} />
+                         <Route  path='/?manufacturer=Inels' component={Main} /> 
                         <Route path='/smarthome/:productID' component={ProductPage} />
                         <Route path='/client/login' component={Authorization} />
                         <Route path='/client/profile' component={ProfilePage} />
                         <Route path='/client/signup' component={Registration} />
                         <Route path='/client/cart' component={Cart} />
                         <Route path='/admin' component={AdminPanel} />
-                        <Redirect to='/404' />
+                        {/* <Redirect to='/404' /> */}
                     </Switch>
                 {/* <Footer/> */}
                 </BrowserRouter>

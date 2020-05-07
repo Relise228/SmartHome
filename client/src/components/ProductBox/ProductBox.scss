@@ -6,9 +6,17 @@
 	box-shadow: 1px 4px 6px #74AEE7;
     border-radius: 30px;
     display: block;
-
+    cursor: pointer;
+    transition: transform 500ms ease-out;
     
-}	
+}
+
+.box:hover {
+    -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.05);
+ 
+}
 
 .productImage{
     position: relative;

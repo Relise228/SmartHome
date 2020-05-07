@@ -1,13 +1,22 @@
 .main {
     &_sortbar {
         width: 210px;
-        height: 380px;
+        height: 100%;
         border: 2px solid #74AEE7;
         border-radius: 30px;
         box-shadow: 5px 4px 5px rgba(116, 174, 231, 0.47);
         padding: 27px 27px;
         display: flex;
         flex-direction: column;   
+    }
+
+    &_sortbar-select {
+        height: 25px;
+        outline: none;
+        padding-left: 5px;
+        margin-bottom: 8px;
+        border: 1px solid #74AEE7;
+        border-radius: 50px;
     }
 
     &_sortbar-producer {

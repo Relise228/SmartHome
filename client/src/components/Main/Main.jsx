@@ -18,7 +18,7 @@ export class Main extends React.Component {
         return(
             <div className="main">
                 <div className="wrapper">
-                    <MainContent history={this.props.history}/>
+                    <MainContent history={this.props.history} location={this.props.location}/>
                 </div>
             </div>
         );
