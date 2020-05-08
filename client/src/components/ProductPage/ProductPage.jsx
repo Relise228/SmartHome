@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProductPage.scss';
 import { ProductBox } from '../ProductBox/ProductBox';
+import { ModalImage } from '../ModalImage';
 
 export class ProductPage extends React.Component {
     constructor(props) {
@@ -24,7 +25,10 @@ export class ProductPage extends React.Component {
             stockChange: false,
             descriptionChange: false,
             imageChange: false,
-            discountChange: false
+            discountChange: false,
+            srcModal: null,
+            showModal: false,
+            fullLink: []
         }
         
         this.areaBox = React.createRef();
@@ -55,6 +59,9 @@ export class ProductPage extends React.Component {
 
         this.setDiscountChange = this.setDiscountChange.bind(this);
         this.onChangeDiscount = this.onChangeDiscount.bind(this);
+
+        this.onClickImage = this.onClickImage.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
@@ -397,6 +404,25 @@ onChangeDiscount(e) {
     this.setState({discount: value});
 }
 
+onClickImage(e) {
+    const src = e.currentTarget.src;
+ 
+   
+
+   
+    
+
+    this.setState({ srcModal: src });
+    this.setState({ showModal: true });
+        
+    
+}
+
+closeModal() {
+    this.setState({ showModal: false});
+    console.log(this.state.showModal);
+}
+
    
     render() {
         return (
@@ -404,11 +430,11 @@ onChangeDiscount(e) {
                 <div className="productpage_wrapper">
                     <div className="product">
                         <div className="product_images">
-                           <img className="product_image-main" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[0] } alt=""/>
+                           <img className="product_image-main" onClick={this.onClickImage} src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[0] } alt=""/>
                             <div className="bottom_images">
-                                <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[1] } alt=""/>
-                                <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[2] } alt=""/>
-                                <img className="bottom_image" src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[3] } alt=""/>
+                                <img className="bottom_image" onClick={this.onClickImage} src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[1] } alt=""/>
+                                <img className="bottom_image" onClick={this.onClickImage} src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[2] } alt=""/>
+                                <img className="bottom_image" onClick={this.onClickImage} src={"https://smarthomeproject.s3.eu-central-1.amazonaws.com/"+ this.state.productID + "/" + this.state.images[3] } alt=""/>
                                 {this.state.stock !== 0 ? <div className="product_buy">
                                    {this.state.priceChange ? <input className="edit_input" type="text" onChange={this.onChangePrice} value={this.state.price}/> : <p className="product_price" onDoubleClickCapture={this.setPriceChange}>{Math.floor(this.state.price - (this.state.price * (this.state.discount/100))) + " грн"}</p>}
                                    <input type="number" value={this.state.quantity} onChange={this.onChangeQuantity} className="product_count"/>
@@ -470,7 +496,13 @@ onChangeDiscount(e) {
                         </div>
                     </div>
                 </div>
+                { this.state.showModal && <ModalImage closeModal={this.closeModal} productID = {this.state.productID} firstSrc={this.state.srcModal} images={this.state.fullLink}/> }
             </div>
+
+           
         );
+
+
+
     }
 }

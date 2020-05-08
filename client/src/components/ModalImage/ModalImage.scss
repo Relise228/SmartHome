@@ -1,0 +1,39 @@
+.modal {
+    width: 100%;
+    max-width: 900px;
+    height: 80%;
+    position: absolute;
+    top: 12%;
+    left: 25%;
+    background-color: #fff;
+    border: 2px solid #206EBC;
+    border-radius: 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    
+    
+
+    &_image {
+        object-fit: contain;
+        max-width: 700px;
+        max-height: 500px;
+        width: 100%;
+        position: relative;
+        
+    }
+
+    &_cross {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        font-size: 30px;
+        color: red;
+        cursor: pointer;
+    }
+
+
+
+}
