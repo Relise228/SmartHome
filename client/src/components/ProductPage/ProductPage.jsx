@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useDebugValue } from 'react';
 import './ProductPage.scss';
 import { ProductBox } from '../ProductBox/ProductBox';
 import { ModalImage } from '../ModalImage';
@@ -29,7 +29,8 @@ export class ProductPage extends React.Component {
             srcModal: null,
             showModal: false,
             fullLink: [],
-            bought: false
+            bought: false,
+            showpage: false
         }
         
         this.areaBox = React.createRef();
@@ -64,6 +65,8 @@ export class ProductPage extends React.Component {
 
         this.onClickImage = this.onClickImage.bind(this);
         this.closeModal = this.closeModal.bind(this);
+
+        this.setShowPage = this.setShowPage.bind(this);
     }
 
     componentDidMount() {
@@ -80,6 +83,10 @@ export class ProductPage extends React.Component {
         this.setState({ recomendedGoods });
     }
 
+    setShowPage (showpage) {
+        this.setState({ showpage });
+    }
+
     fetchRecomended() {
         const axios = require('axios');
         axios.get(`http://localhost:5000/api/goods/`, {
@@ -91,6 +98,7 @@ export class ProductPage extends React.Component {
           .then( response => {
             const data = response.data;
             this.setRecomended(data);
+            this.setShowPage(true);
             
           })
           .catch(function (error) {
@@ -442,7 +450,8 @@ closeModal() {
     render() {
         return (
             <div className="wrapper">
-                 {this.state.bought ? <div ref={this.inf} className="bought" >Додано в корзину</div> : ''}
+                
+                { this.state.showpage ? 
                 <div className="productpage_wrapper">
                     <div className="product">
                         <div className="product_images">
@@ -454,8 +463,10 @@ closeModal() {
                                 {this.state.stock !== 0 ? <div className="product_buy">
                                    {this.state.priceChange ? <input className="edit_input" type="text" onChange={this.onChangePrice} value={this.state.price}/> : <p className="product_price" onDoubleClickCapture={this.setPriceChange}>{Math.floor(this.state.price - (this.state.price * (this.state.discount/100))) + " грн"}</p>}
                                    <input type="number" value={this.state.quantity} onChange={this.onChangeQuantity} className="product_count"/>
-                                   <button className="product_buy-button" onClick={this.addProductInCart}>Купити</button>
+                                   <button className="product_buy-button" onClick={this.addProductInCart}>Купити</button><br/>
+                                   
                                 </div> : ''}
+                                {this.state.bought ? <div ref={this.inf} className="bought" >Додано в корзину</div> : ''}
                                 {this.state.priceChange ? <button className="button-save" onClick={this.saveChangedPrice}>Зберегти</button> : ''}
                             </div>
                         </div>
@@ -511,12 +522,10 @@ closeModal() {
                             ))}
                         </div>
                     </div>
+                    { this.state.showModal && <ModalImage closeModal={this.closeModal} productID = {this.state.productID} firstSrc={this.state.srcModal} images={this.state.fullLink}/> }
                 </div>
-                { this.state.showModal && <ModalImage closeModal={this.closeModal} productID = {this.state.productID} firstSrc={this.state.srcModal} images={this.state.fullLink}/> }
-                
-            </div>
-
-           
+         : <div className="loading">Loading......</div>}
+            </div>  
         );
 
 

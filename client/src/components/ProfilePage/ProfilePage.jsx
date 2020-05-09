@@ -4,6 +4,7 @@ import { FieldInformation } from '../FieldInformation';
 import { HouseInfo } from '../HouseInfo/HouseInfo';
 import { OrderBox } from '../OrderBox/OrderBox';
 import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
 
 
 export class ProfilePage extends React.Component {
@@ -15,23 +16,33 @@ export class ProfilePage extends React.Component {
             email: undefined,
             allOrders: [],
             houseInfoVisible: false,
+            showpage: false
             
         }
-        
         this.logOut = this.logOut.bind(this);
         this.onHouseDescriptionEdit = this.onHouseDescriptionEdit.bind(this);
+        this.setShowPage = this.setShowPage.bind(this);
 
         
     }
+    
 
     componentDidMount() {
         this.getUserInfo();
         this.getUserOrder();
+    
     }
+
+    setShowPage (showpage) {
+        this.setState({ showpage });
+    }
+
+
  
 
 
     getUserInfo() {
+
         const axios = require('axios');
 
         axios.get('http://localhost:5000/api/auth', {
@@ -83,6 +94,7 @@ export class ProfilePage extends React.Component {
             this.setAllOrders(response.data);
 
             console.log(this.state.allOrders);
+             this.setShowPage(true);
             
           })
           .catch(function (error) {
@@ -171,13 +183,18 @@ export class ProfilePage extends React.Component {
         else
             this.setState({houseInfoVisible: false});
     }
+
+    
     
 
    
     
     render() {
+
+
         return(
             <div className="wrapper">
+                { this.state.showpage ?
                 <div className="info">
                     <p className="info_header">
                         Особистий кабінет
@@ -203,6 +220,7 @@ export class ProfilePage extends React.Component {
                         </div>
                     </div>
                 </div>
+                    : <div className="loading">Loading.....</div>}
             </div>
             
         )
