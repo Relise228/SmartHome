@@ -42,7 +42,7 @@ router.post('/confirm', auth, async (req, res) => {
             res.json({ msg: 'Cart not found'});
         }
 
-        cart.adress = adress;
+        cart.address = adress;
         cart.date = Date.now();
         cart.status = 'Confirmed';
         await cart.save();

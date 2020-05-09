@@ -7,7 +7,7 @@ const OrderSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        required: false
+        default: 'Адреса не вказана'
     },
     products: [
         {
