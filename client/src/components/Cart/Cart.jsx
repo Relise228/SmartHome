@@ -1,6 +1,7 @@
 import React from 'react';
 import './Cart.scss';
 import { CartProduct } from '../CartProduct/CartProduct';
+import { Redirect } from 'react-router-dom';
 
 export class Cart extends React.Component {
     constructor(props) {
@@ -8,6 +9,7 @@ export class Cart extends React.Component {
         this.state = {
             cartProducts: [],
             totalPrice: 0
+
         }
         
         this.totalPrice = React.createRef();
@@ -17,10 +19,11 @@ export class Cart extends React.Component {
         this.setTotalPrice = this.setTotalPrice.bind(this);
         this.minusTotalPrice = this.minusTotalPrice.bind(this);
         this.confirmOrder =  this.confirmOrder.bind(this);
+
+
     }
 
-    
-
+  
     setCartProducts(cartProducts) {
         this.setState({ cartProducts });
     }
@@ -38,6 +41,15 @@ export class Cart extends React.Component {
           }
           )
           .then( response => {
+            
+            if(response.data.msg == "Token is not valid") {
+                localStorage.removeItem("token");
+                localStorage.removeItem("admin");
+                this.props.history.push('/client/login');
+                window.location.reload();
+              }
+
+
             this.setCartProducts(response.data.products);
           })
           .catch(function (error) {

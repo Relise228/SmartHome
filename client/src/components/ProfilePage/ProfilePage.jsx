@@ -3,6 +3,7 @@ import './ProfilePage.scss';
 import { FieldInformation } from '../FieldInformation';
 import { HouseInfo } from '../HouseInfo/HouseInfo';
 import { OrderBox } from '../OrderBox/OrderBox';
+import { Redirect } from 'react-router-dom';
 
 
 export class ProfilePage extends React.Component {
@@ -13,12 +14,13 @@ export class ProfilePage extends React.Component {
             telephoneNumber: undefined,
             email: undefined,
             allOrders: [],
-            houseInfoVisible: false
+            houseInfoVisible: false,
             
         }
         
         this.logOut = this.logOut.bind(this);
         this.onHouseDescriptionEdit = this.onHouseDescriptionEdit.bind(this);
+
         
     }
 
@@ -39,10 +41,19 @@ export class ProfilePage extends React.Component {
           }
           )
           .then( response => {
+            if(response.data.msg == "Token is not valid") {
+                localStorage.removeItem("token");
+                localStorage.removeItem("admin");
+                this.props.history.push('/client/login');
+                window.location.reload();
+              }
+
             this.setInfo(response.data.name,
                 response.data.telephoneNumber,
                 response.data.email);
                 
+               console.log(response.data.msg);
+               
 
                 if(response.data.type === 'Admin') {
                     localStorage.setItem("admin", true);
@@ -54,6 +65,8 @@ export class ProfilePage extends React.Component {
             console.log(error);
           });
     }
+
+    
 
     getUserOrder() {
         const axios = require('axios');
@@ -175,7 +188,7 @@ export class ProfilePage extends React.Component {
                             <div className={this.state.allOrders[0] ? "info_order-wrapper display" : "info_order-wrapper"}>
                                 {this.state.allOrders.map(order => (
                                     <OrderBox key={order._id} order={order} />
-                                ))}
+                                )) }
                             </div>
                         </div>
                         <div className="info_user">
@@ -191,6 +204,7 @@ export class ProfilePage extends React.Component {
                     </div>
                 </div>
             </div>
+            
         )
     }
 }

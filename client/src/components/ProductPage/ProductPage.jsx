@@ -28,13 +28,15 @@ export class ProductPage extends React.Component {
             discountChange: false,
             srcModal: null,
             showModal: false,
-            fullLink: []
+            fullLink: [],
+            bought: false
         }
         
         this.areaBox = React.createRef();
         this.area = React.createRef();
         this.feedBackRef = React.createRef();
         this.markRef = React.createRef();
+        this.inf = React.createRef();
 
         this.onChangeQuantity = this.onChangeQuantity.bind(this);
         
@@ -180,14 +182,27 @@ export class ProductPage extends React.Component {
         }
         )
         .then( response => {
+            if(response.data.msg == "Token is not valid") {
+                localStorage.removeItem("token");
+                localStorage.removeItem("admin");
+                this.props.history.push('/client/login');
+                window.location.reload();
+              }
+
             console.log(response);
+            this.setState({ bought: true});
+            
         })
         .catch(function (error) {
             console.log(error);
         });
 
+    } else {
+        this.props.history.push('/client/login');
     }
    }
+
+
 
    onChangeQuantity(e) {
         const quantity = e.currentTarget.value; 
@@ -427,6 +442,7 @@ closeModal() {
     render() {
         return (
             <div className="wrapper">
+                 {this.state.bought ? <div ref={this.inf} className="bought" >Додано в корзину</div> : ''}
                 <div className="productpage_wrapper">
                     <div className="product">
                         <div className="product_images">
@@ -497,6 +513,7 @@ closeModal() {
                     </div>
                 </div>
                 { this.state.showModal && <ModalImage closeModal={this.closeModal} productID = {this.state.productID} firstSrc={this.state.srcModal} images={this.state.fullLink}/> }
+                
             </div>
 
            

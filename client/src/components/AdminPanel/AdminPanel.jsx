@@ -12,7 +12,9 @@ export class AdminPanel extends React.Component {
             orderVisible: false,
             needSearch: false,
             searchNumber : 0,
-            buttonToDelivery: false
+            buttonToDelivery: false,
+            addProduct: false,
+            needAorderInfo: false
         } 
 
         this.refSearch = React.createRef();
@@ -23,6 +25,7 @@ export class AdminPanel extends React.Component {
         this.getInDeliveryOrder = this.getInDeliveryOrder.bind(this);
         this.getOrderByNumber = this.getOrderByNumber.bind(this);
         this.fetchOrdersByNumber = this.fetchOrdersByNumber.bind(this);
+        this.addProduct = this.addProduct.bind(this);
 
 
     }
@@ -33,6 +36,8 @@ export class AdminPanel extends React.Component {
 
     getOrderByNumber() {
         console.log("getOrderByNumder");
+        this.setState({ needAorderInfo: true });
+        this.setState({ addProduct: false });
         this.setState({ needSearch: true });
         this.setState({ orderVisible: false });
         this.setState({ buttonToDelivery: false });
@@ -40,6 +45,8 @@ export class AdminPanel extends React.Component {
 
     }
     getConfirmedOrder() {
+        this.setState({ needAorderInfo: true });
+        this.setState({ addProduct: false });
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: true });
@@ -67,6 +74,8 @@ export class AdminPanel extends React.Component {
     }
 
     getFinishedOrder() {
+        this.setState({ needAorderInfo: true });
+        this.setState({ addProduct: false });
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: false });
@@ -95,6 +104,8 @@ export class AdminPanel extends React.Component {
     }
 
     getInDeliveryOrder() {
+        this.setState({ needAorderInfo: true });
+        this.setState({ fasle: true });
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: false });
@@ -152,6 +163,11 @@ export class AdminPanel extends React.Component {
 
     }
 
+    addProduct() {
+        this.setState({ needAorderInfo: false });
+        this.setState({ addProduct: true });
+    }
+
     
    
 
@@ -165,8 +181,9 @@ export class AdminPanel extends React.Component {
                     confirmedOrder = {this.getConfirmedOrder}
                     finishedOrder = {this.getFinishedOrder}
                     inDeliveryOrder = {this.getInDeliveryOrder}
+                    addProduct = {this.addProduct}
                 />
-               <div className='wrapper-aorder-inf'> 
+              {this.state.needAorderInfo ? <div className='wrapper-aorder-inf '  > 
                    {this.state.needSearch ?  <div className='aorder_search'>
                         <input className="admin_input-search" ref={this.refSearch} value={this.state.searchId} onChange={this.changeSearch} type="text"/> 
                         <button onClick={this.fetchOrdersByNumber} className="admin_button-search">Знайти</button>
@@ -176,7 +193,9 @@ export class AdminPanel extends React.Component {
                         <AdminOrder toDelivery={this.toDelivery} buttonToDelivery={this.state.buttonToDelivery} order={order} key={order._id}/>
                         )) : ''}
                     </div> : ''}
-                </div>
+                   
+                </div> : ''}
+               {this.state.addProduct ? <div className='admin_add-product'></div> : ''}
 
             </div>
 
