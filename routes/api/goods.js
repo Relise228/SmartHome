@@ -5,6 +5,8 @@ const { check, validationResult } = require('express-validator');
 
 const SmartHomeSystem = require('../../models/SmartHomeSystem');
 const Review = require('../../models/Review');
+const Order = require('../../models/Order');
+const Client = require('../../models/Client');
 
 // @route    GET api/goods
 // @desc     Get all systems
@@ -29,25 +31,40 @@ router.get('/', async (req, res) => {
         filter.order = url.order;
     }
 
-    if (filter.manufacturer && filter.priceTo) {
-        finalQuery = {
-            $and : [
-                { price : { $gte : filter.priceFrom, $lte : filter.priceTo }},
-                { manufacturer : { $in : filter.manufacturer}}
-            ]
-        };
-    } else if (filter.manufacturer) {
-        finalQuery = { manufacturer : { $in : filter.manufacturer}};
-    } else if (filter.priceTo) {
-        finalQuery = { price : { $gte : filter.priceFrom, $lte : filter.priceTo }}
-    }
-
     try {
+        if (filter.manufacturer) {
+            finalQuery = {
+                $and : [
+                    { manufacturer : { $in : filter.manufacturer}},
+                    { status: 'Visible'}
+                ]
+            }
+        } else {
+            finalQuery = {status: 'Visible'};
+        }
+        const systems = await SmartHomeSystem.find(finalQuery);
+        let result = [];
         
-        const systems = await SmartHomeSystem.find( 
-            finalQuery
-        ).sort(filter.order == 'none' ? {} : filter.order);
-        res.json(systems);
+        systems.forEach(system => {
+            if (url.priceFrom || url.priceTo) {
+                let sortPrice = system.price * (1 - system.discount / 100);
+                if (sortPrice >= filter.priceFrom && sortPrice <= filter.priceTo) {
+                    result.push(system);
+                }
+            } else {
+                result.push(system);
+            }
+        });
+        if (filter.order == 'price') {
+            result.sort(function(a, b) {
+                return a.price * (1 - a.discount / 100) - b.price * (1 - b.discount / 100);
+            })
+        } else if (filter.order == '-price') {
+            result.sort(function(a, b) {
+                return b.price * (1 - b.discount / 100) - a.price * (1 - a.discount / 100);
+            })
+        }
+        res.json(result);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
