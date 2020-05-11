@@ -291,6 +291,41 @@ router.post('/orders/toDelivery', auth, async (req, res) => {
 });
 
 
+// @route    POST api/admin/system/visible
+// @desc     Add system
+// @access   Private
+router.post('/system/notVisible', auth, async (req, res) => {
+    try {
+        const { systemId } = req.body;
+        const system = await SmartHomeSystem.findById( systemId );
+        system.status = "Not Visible";
+        await system.save();
+        res.json(system);
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+
+// @route    POST api/admin/system/visible
+// @desc     Add system
+// @access   Private
+router.post('/system/visible', auth, async (req, res) => {
+    try {
+        const { systemId } = req.body;
+        const system = await SmartHomeSystem.findById( systemId );
+        system.status = "Visible";
+        await system.save();
+        res.json(system);
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+
+
 // @route    POST api/admin/system
 // @desc     Add system
 // @access   Private
@@ -301,12 +336,8 @@ router.post(
         [
             check('title', 'Title is required').not().isEmpty(),
             check('manufacturer', 'Manufacturer is required').not().isEmpty(),
-            check('images', 'Images is required').not().isEmpty(),
             check('quantity', 'Quantity is required').not().isEmpty(),
             check('description', 'Description is required').not().isEmpty(),
-            check('wirelessStandart', 'Wireless standart is required').not().isEmpty(),
-            check('controlOption', 'Control option is required').not().isEmpty(),
-            check('warrantyPeriod', 'Warranty period is required').not().isEmpty(),
             check('price', 'Price is required').not().isEmpty()
         ]
     ], 
@@ -316,20 +347,14 @@ router.post(
             return res.json({ errors: errors.array() });
         }
         try {
-            const {title, manufacturer, images, quantity, description, wirelessStandart, controlOption, warrantyPeriod, price, discount} = req.body;
+            const {title, manufacturer, quantity, description, price, discount} = req.body;
             const counter = await SystemCounter.findOne({ target: 'system'});
             let system = new SmartHomeSystem ({
                 title,
                 manufacturer,
                 code: counter.count,
                 quantity,
-                images,
                 description,
-                wirelessStandart,
-                controlOption,
-                warrantyPeriod,
-                controlOption,
-                warrantyPeriod,
                 price,
                 discount
             });
@@ -344,6 +369,8 @@ router.post(
             res.status(500).send('Server error');
         }
 });
+
+
 
 
 

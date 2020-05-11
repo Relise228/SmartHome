@@ -8,6 +8,7 @@ const Review = require('../../models/Review');
 const Order = require('../../models/Order');
 const Client = require('../../models/Client');
 
+
 // @route    GET api/goods
 // @desc     Get all systems
 // @access   Public
@@ -33,14 +34,7 @@ router.get('/', async (req, res) => {
 
     try {
         if (filter.manufacturer) {
-            finalQuery = {
-                $and : [
-                    { manufacturer : { $in : filter.manufacturer}},
-                    { status: 'Visible'}
-                ]
-            }
-        } else {
-            finalQuery = {status: 'Visible'};
+            finalQuery = { manufacturer : { $in : filter.manufacturer}}
         }
         const systems = await SmartHomeSystem.find(finalQuery);
         let result = [];

@@ -29,15 +29,15 @@ const SmartHomeSystemSchema = new mongoose.Schema({
     },
     wirelessStandart: {
         type: String,
-        required: true
+        required: false
     },
     controlOption: {
         type: String,
-        required: true
+        required: false
     },
     warrantyPeriod: {
         type: Number,
-        required: true
+        required: false
     },
     price: {
         type: Number,
@@ -49,7 +49,7 @@ const SmartHomeSystemSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: "Visible"
+        default: "Not Visible"
     }
 },
 { 
