@@ -14,7 +14,14 @@ export class AdminPanel extends React.Component {
             searchNumber : 0,
             buttonToDelivery: false,
             addProduct: false,
-            needAorderInfo: false
+            needAorderInfo: false,
+            name: undefined,
+            price: null,
+            count: null,
+            discount: null,
+            description: undefined,
+            manufacture: undefined
+
         } 
 
         this.refSearch = React.createRef();
@@ -27,6 +34,14 @@ export class AdminPanel extends React.Component {
         this.fetchOrdersByNumber = this.fetchOrdersByNumber.bind(this);
         this.addProduct = this.addProduct.bind(this);
 
+        this.changeName = this.changeName.bind(this);
+        this.changePrice = this.changePrice.bind(this);
+        this.changeCount = this.changeCount.bind(this);
+        this.changeDiscount = this.changeDiscount.bind(this);
+        this.changeDescription = this.changeDescription.bind(this);
+        this.changeManufacture = this.changeManufacture.bind(this);
+
+        this.onSubmit = this.onSubmit.bind(this);
 
     }
 
@@ -168,6 +183,75 @@ export class AdminPanel extends React.Component {
         this.setState({ addProduct: true });
     }
 
+    changeName(e) {
+        const name = e.currentTarget.value;
+        this.setState({ name });
+    }
+    changePrice(e) {
+        const price = e.currentTarget.value;
+        this.setState({ price });
+    }
+    changeCount(e){
+        const count = e.currentTarget.value;
+        this.setState({ count });
+    }
+
+    changeDiscount(e){
+        const discount = e.currentTarget.value;
+        this.setState({ discount });
+    }
+
+    changeDescription(e){
+        const description = e.currentTarget.value;
+        this.setState({ description });
+    }
+
+    changeManufacture(e) {
+        const manufacture = e.currentTarget.value;
+        this.setState({ manufacture });
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        if(this.state.name != undefined && this.state.name != '') {
+            if(this.state.manufacture != undefined && this.state.manufacture != '') {
+                if(this.state.price != null && this.state.price != '') {
+                    if(this.state.count != null && this.state.count != '') {
+                        if(this.state.discount != null && this.state.discount != '') {
+                            if(this.state.description != undefined && this.state.undefined != '') {
+                                const axios = require('axios');
+                                this.data = {
+                                    title: this.state.name,
+                                    manufacturer: this.state.manufacture,
+                                    quantity: this.state.count,
+                                    description: this.state.description,
+                                    discount: this.state.discount,
+                                    price: this.state.price
+                                }
+                        
+                                axios.post('http://localhost:5000/api/admin/system', this.data, {
+                                    headers: {
+                                        'x-auth-token': localStorage.token,
+                                        'Content-type': 'application/json'
+                                    }
+                                  }
+                                  )
+                                  .then( response => {
+                                    console.log(response);
+                                  })
+                                  .catch(function (error) {
+                                    console.log(error);
+                                  });
+                            }  
+                        }  
+                    }  
+                }  
+            }  
+        }
+    }
+    
+  
+
     
    
 
@@ -195,12 +279,22 @@ export class AdminPanel extends React.Component {
                     </div> : ''}
                    
                 </div> : ''}
-               {this.state.addProduct ? <div className='admin_add-product'></div> : ''}
+               {this.state.addProduct ? <form onSubmit={this.onSubmit} className='admin_add-product'>
+                <label htmlFor="" className="add_product-name">Назва товару<input onChange={this.changeName}  className="add_product-name-input" type="text" name="" id=""/></label> <br/> 
+                <label htmlFor="" className="add_product-manufacture">Виробник<input onChange={this.changeManufacture}  className="add_product-manufacture-input" type="text" name="" id=""/></label> <br/> 
+                <label htmlFor="" className="add_product-count">Ціна товару<input onChange={this.changePrice} className="add_product-count-input" type="number" name="" id=""/></label> <br/> 
+                <label htmlFor="" className="add_product-count">Кількість товару<input onChange={this.changeCount} className="add_product-count-input" type="number" name="" id=""/></label> <br/> 
+                <label htmlFor="" className="add_product-discount">Знижка<input onChange={this.changeDiscount} className="add_product-discount-input" type="number" name="" id=""/></label>  <br/>
+                <textarea onChange={this.changeDescription} className="add_product-description"></textarea> <br/>
+                <button className="add_product-button">Додати</button>
+               </form> : ''}
 
             </div>
+                 
 
 
             </div>
+            
         )
     }
 }

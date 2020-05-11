@@ -69,7 +69,17 @@ export class MainContent extends React.Component {
             <div className="main_content">
                 <SortBar history={this.props.history} location={this.props.location}/>
               <div className="main_grid">
-                  {this.state.goods.map(good => (
+                  {this.state.goods.map(good => ( 
+                    
+                good.status =="Visible" ?  <ProductBox
+                    key={good._id}
+                    imageSrc={good.images[0]}
+                    productNameSrc={good.title}
+                    priceSrc={good.price}
+                    id={good._id}
+                    history={this.props.history}
+                    discount={good.discount}
+                  /> : localStorage.admin == "true" ?
                   <ProductBox
                     key={good._id}
                     imageSrc={good.images[0]}
@@ -78,7 +88,7 @@ export class MainContent extends React.Component {
                     id={good._id}
                     history={this.props.history}
                     discount={good.discount}
-                  />
+                  /> : ''
                   ))}
               </div>
             </div>

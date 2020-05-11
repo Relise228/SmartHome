@@ -89,7 +89,7 @@ export class ProductPage extends React.Component {
 
     fetchRecomended() {
         const axios = require('axios');
-        axios.get(`http://localhost:5000/api/goods/`, {
+        axios.get(`http://localhost:5000/api/goods/?perpage=4`, {
             headers: {
                 'Content-type': 'application/json'
             },
@@ -99,7 +99,6 @@ export class ProductPage extends React.Component {
             const data = response.data;
             this.setRecomended(data);
             this.setShowPage(true);
-            
           })
           .catch(function (error) {
             console.log(error);
@@ -199,6 +198,7 @@ export class ProductPage extends React.Component {
 
             console.log(response);
             this.setState({ bought: true});
+           
             
         })
         .catch(function (error) {
@@ -466,8 +466,8 @@ closeModal() {
                                    <button className="product_buy-button" onClick={this.addProductInCart}>Купити</button><br/>
                                    
                                 </div> : ''}
-                                {this.state.bought ? <div ref={this.inf} className="bought" >Додано в корзину</div> : ''}
-                                {this.state.priceChange ? <button className="button-save" onClick={this.saveChangedPrice}>Зберегти</button> : ''}
+                                { this.state.bought ? <div ref={this.inf} className="bought" >Додано в корзину</div> : '' }
+                                { this.state.priceChange ? <button className="button-save" onClick={this.saveChangedPrice }>Зберегти</button> : ''}
                             </div>
                         </div>
                         <div className="product_info">
@@ -484,7 +484,7 @@ closeModal() {
                     </div>
                     <div className="product_feedback">
                         <div className="review">Відгуки</div>
-                        {this.state.reviews.map(review => (
+                        { this.state.reviews.map(review => (
                             <div key={review._id} className="review_box">
                                 <div className="review_header">
                                     <div className="review_name">{review.client.name}</div>
@@ -492,7 +492,7 @@ closeModal() {
                                 </div>
                                 <div className="review_body">{review.text}</div>
                             </div>
-                        ))}
+                        )) }
                     <div className="feedback-area-box"  ref={this.areaBox}>
                         Оцінка<select className="mark-select" ref={this.markRef}>
                             <option value="1">1</option>
@@ -508,7 +508,7 @@ closeModal() {
                     <div className="product_recomended">
                         <p className="product_recomended-header">Схожі товари</p>
                         <div className="box_recomended">
-                        {this.state.recomendedGoods.map(good => (
+                        { this.state.recomendedGoods.map(good => (
                             <ProductBox
                                 key={good._id}
                                 className="product_box"
@@ -519,7 +519,7 @@ closeModal() {
                                 history={this.props.history}
                                 discount={good.discount}
                             />
-                            ))}
+                            )) }
                         </div>
                     </div>
                     { this.state.showModal && <ModalImage closeModal={this.closeModal} productID = {this.state.productID} firstSrc={this.state.srcModal} images={this.state.fullLink}/> }

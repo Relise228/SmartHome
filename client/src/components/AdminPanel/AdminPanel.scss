@@ -59,9 +59,119 @@
 }
 
 .admin_add-product {
-    height: 500px;
-    width: 100%;
     border: 1px solid black;
     margin-left: 15%;
-    
+    padding: 30px;
+    border: 1px solid #0803F3;
+    border-radius: 30px;
+    box-shadow: 5px 4px 5px rgba(8, 3, 243, 0.51);
+}
+
+.add_product{
+
+    &-name {
+        color: #0803F3;
+        font-weight: bold;
+    }
+
+    &-name-input {
+        width: 300px;
+        margin-left: 30px;
+        border: 1px solid #0803F3;
+        height: 30px;
+        border-radius: 30px;
+        outline: none;
+        font-size: 18px;
+        padding-left: 15px;
+    }
+    &-manufacture {
+        color: #0803F3;
+        font-weight: bold;
+    }
+    &-manufacture-input {
+        margin-top: 30px;
+        width: 300px;
+        margin-left: 30px;
+        border: 1px solid #0803F3;
+        height: 30px;
+        border-radius: 30px;
+        outline: none;
+        font-size: 18px;
+        padding-left: 15px;
+    }
+
+    &-count {
+        color: #0803F3;
+        font-weight: bold;
+    }
+
+    &-count-input {
+        margin-top: 30px;
+        width: 100px;
+        margin-left: 30px;
+        border: 1px solid #0803F3;
+        height: 30px;
+        border-radius: 30px;
+        outline: none;
+        font-size: 18px;
+        padding-left: 15px;
+    }
+
+    &-discount {
+        color: #0803F3;
+        font-weight: bold;
+    }
+
+    &-discount-input {
+        margin-top: 30px;
+        width: 100px;
+        margin-left: 30px;
+        border: 1px solid #0803F3;
+        height: 30px;
+        border-radius: 30px;
+        outline: none;
+        font-size: 18px;
+        padding-left: 15px;
+    }
+
+    &-description {
+        resize: none;
+        width: 500px;
+        height: 200px;
+        margin-top: 30px;
+        border: 1px solid #0803F3;
+        border-radius: 30px;
+        outline: none;
+        font-size: 14px;
+        padding: 15px;
+    }
+
+    &-photo{
+        color: #0803F3;
+        font-weight: bold;
+    }
+
+    &-photo-input {
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+
+    &-button {
+        margin-top: 30px;
+        width: 100%;
+        height: 50px;
+        background-color: transparent;
+        border: 1px solid #0803F3;
+        border-radius: 50px;
+        color: #0803F3;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    &-button:hover {
+        background-color: #0803F3;
+        color: #fff;
+        cursor: pointer;
+    }
+
+
 }
