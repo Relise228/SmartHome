@@ -32,11 +32,18 @@ router.get('/', async (req, res) => {
         filter.order = url.order;
     }
 
+    if (url.perpage) {
+        filter.perpage = Number.parseInt(url.perpage);
+    }
+
     try {
         if (filter.manufacturer) {
             finalQuery = { manufacturer : { $in : filter.manufacturer}}
         }
-        const systems = await SmartHomeSystem.find(finalQuery);
+
+        let systems = null;
+        if (!filter.perpage) systems = await SmartHomeSystem.find(finalQuery);
+        else systems = await SmartHomeSystem.find(finalQuery).limit(filter.perpage);
         let result = [];
         
         systems.forEach(system => {
