@@ -265,6 +265,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: chartreuse;
+    color: #67CA0E;
     font-weight: bold;
+}
+
+.button-visibility {
+    margin-top: 25px;
+    width: 150px;
+    height: 30px;
+    border: 1px solid #206EBC;
+    border-radius: 30px;
+    background-color: transparent;
+    color: #206EBC;
+    cursor: pointer;
+    outline: none;
+    margin-right: 10px;
+}
+
+.button-visibility:hover {
+    color: #fff;
+    background-color: #206EBC;
+}
+.div-photo {
+    margin-top: 10px;
+}
+
+.send-photo {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #206EBC;
+    border-radius: 30px;
+    background-color: transparent;
+    color: #206EBC;
+    outline: none;
+    cursor: pointer;
+}
+
+.send-photo:hover {
+    color: #fff;
+    background-color: #206EBC;
 }

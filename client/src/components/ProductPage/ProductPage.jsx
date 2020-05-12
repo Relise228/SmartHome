@@ -15,6 +15,7 @@ export class ProductPage extends React.Component {
             manufacture: '',
             description: '',
             price: undefined,
+            status: undefined,
             recomendedGoods: [],
             reviews: [],
             stock: 1,
@@ -30,7 +31,8 @@ export class ProductPage extends React.Component {
             showModal: false,
             fullLink: [],
             bought: false,
-            showpage: false
+            showpage: false,
+            addImg: false
         }
         
         this.areaBox = React.createRef();
@@ -38,6 +40,7 @@ export class ProductPage extends React.Component {
         this.feedBackRef = React.createRef();
         this.markRef = React.createRef();
         this.inf = React.createRef();
+        this.imgInput = React.createRef();
 
         this.onChangeQuantity = this.onChangeQuantity.bind(this);
         
@@ -67,6 +70,10 @@ export class ProductPage extends React.Component {
         this.closeModal = this.closeModal.bind(this);
 
         this.setShowPage = this.setShowPage.bind(this);
+
+        this.setVisibility = this.setVisibility.bind(this);
+        this.addPhoto = this.addPhoto.bind(this);
+        this.sendImg = this.sendImg.bind(this);
     }
 
     componentDidMount() {
@@ -126,7 +133,8 @@ export class ProductPage extends React.Component {
                 response.data.system.code,
                 response.data.reviews,
                 response.data.system.quantity,
-                response.data.system.discount);
+                response.data.system.discount,
+                response.data.system.status);
                 console.log(response);
           })
           .catch(function (error) {
@@ -137,8 +145,8 @@ export class ProductPage extends React.Component {
           });  
    }
 
-   setStates(images, title, manufacture, description, price, code, reviews, stock, discount){
-        this.setState({ images, code, title, manufacture, description, price, reviews, stock, discount });
+   setStates(images, title, manufacture, description, price, code, reviews, stock, discount,status){
+        this.setState({ images, code, title, manufacture, description, price, reviews, stock, discount, status });
    }
 
    returnStars(count) {
@@ -446,6 +454,96 @@ closeModal() {
     console.log(this.state.showModal);
 }
 
+setVisibility() {
+    const axios = require('axios');
+    let adress = '';
+    if(this.state.status == 'Visible') {
+        adress = 'http://localhost:5000/api/admin/system/notVisible';
+    } else {
+        adress = 'http://localhost:5000/api/admin/system/visible';
+    }
+        
+        this.data = {
+            systemId:this.state.productID,
+        }
+        console.log(this.data);
+
+        axios.post(adress, this.data, {
+            headers: {
+                'x-auth-token': localStorage.token,
+                'Content-type': 'application/json'
+            }, 
+        }
+        )
+        .then( response => {
+    
+           console.log(response);
+           window.location.reload();
+            
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+addPhoto() {
+    this.setState({ addImg: true });
+    const axios = require('axios');
+    this.data = {
+        systemId: this.state.productID
+    }
+
+    axios.post('http://localhost:5000/api/admin/system/setId', this.data, {
+        headers: {
+            'x-auth-token': localStorage.token,
+            'Content-type': 'application/json'
+        }, 
+    }
+    )
+    .then( response => {
+
+       console.log(response);
+        
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
+sendImg() {
+    console.log(this.imgInput.current.files[0]);
+    
+    const axios = require('axios');
+    let file = this.imgInput.current.files[0];
+
+    let formdata = new FormData();
+
+    formdata.append('image', file);
+
+
+    this.data = {
+        image: formdata
+    }
+
+    console.log(this.data)
+
+    axios.post('http://localhost:5000/api/admin/system/image', this.data, {
+        headers: {
+            'x-auth-token': localStorage.token
+        }, 
+    }
+    )
+    .then( response => {
+
+       console.log(response);
+    //    window.location.reload();
+        
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
    
     render() {
         return (
@@ -468,10 +566,14 @@ closeModal() {
                                 </div> : ''}
                                 { this.state.bought ? <div ref={this.inf} className="bought" >Додано в корзину</div> : '' }
                                 { this.state.priceChange ? <button className="button-save" onClick={this.saveChangedPrice }>Зберегти</button> : ''}
+                                
                             </div>
                         </div>
                         <div className="product_info">
                         { this.state.nameChange ? <input className="edit_input" onChange={this.onChangeTitle} type="text" value={this.state.title}/> : <h2 className="product_name" onDoubleClickCapture={this.setTitleChange}>{this.state.title}</h2>}
+                        {localStorage.admin ? <button className="button-visibility" onClick={this.setVisibility}>{this.state.status}</button> : ''}
+                        {localStorage.admin && this.state.images.length < 4 ? <button onClick={this.addPhoto} className="button-visibility" >Додати фото</button> : ''}    
+                        {this.state.addImg ? <div className="div-photo"><input accept="image/jpeg,image/png" ref={this.imgInput}  type="file"/> <button onClick={this.sendImg} className="send-photo">OK</button></div> : ''}   
                             <p className='product_code'>{"Код товару: " + this.state.code}</p>
                             { this.state.stockChange ? <input className="edit_input" onChange={this.onChangeStock} type="text" value={this.state.stock}/> : <p className="stock" onDoubleClickCapture={this.setStockChange}>{'У наявності: ' + this.state.stock}</p>}
                             { this.state.discountChange ? <input className="edit_input" onChange={this.onChangeDiscount} type="text" value={this.state.discount}/> : <p className="discount_" onDoubleClickCapture={this.setDiscountChange}>{'Знижка: ' + this.state.discount + '%'}</p>}

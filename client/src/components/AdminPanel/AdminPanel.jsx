@@ -121,6 +121,7 @@ export class AdminPanel extends React.Component {
     getInDeliveryOrder() {
         this.setState({ needAorderInfo: true });
         this.setState({ fasle: true });
+        this.setState({ addProduct: false });
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: false });
