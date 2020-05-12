@@ -7,13 +7,14 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 const Client = require('../../models/Client');
+const Home = require('../../models/Home');
 
 // @route    GET api/auth
 // @desc     Test route
 // @access   Public
 router.get('/', auth, async (req, res) => {
     try {
-        const client = await Client.findById(req.client.id).select('-password');
+        const client = await Client.findById(req.client.id).populate('home').select('-password');
         res.json(client);
     } catch(err) {
         console.error(err.message);
