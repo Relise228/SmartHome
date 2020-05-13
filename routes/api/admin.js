@@ -7,6 +7,9 @@ const auth = require('../../middleware/adminAuth');
 //const upload = require('../../services/file-upload');
 const { check, validationResult } = require('express-validator');
 
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
+
 
 
 const SmartHomeSystem = require('../../models/SmartHomeSystem');
@@ -14,58 +17,48 @@ const SystemCounter = require('../../models/SystemCounter');
 const LastSystem = require('../../models/LastSystem');
 const Order = require('../../models/Order');
 
-aws.config.update({
-    secretAccessKey: 'KWEundrMFXeZP/RyhugLk8wdd5p8dTElWCpApPTp',
-    accessKeyId: 'AKIAJYQCPYOIUFUYJKLQ',
+
+const config = {
+    secretAccessKey: 'eWdjz2Av7iF4AxIRU+o4csRoPoVUP0Jy6Y/SLgZD',
+    accessKeyId: 'AKIAJ7AEHAQJZUKDXNNA',
     region: 'eu-central-1'
-})
-
-var s3 = new aws.S3()
-
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-        cb(null, true);
-    } else {
-        cb(new Error('Invalid Mime Type, only JPEG'), false);
-    }
 }
 
 
 // @route    POST api/admin/system/image
 // @desc     Upload image to system
 // @access   Private
-router.post('/system/image', auth, async(req, res) => {
-    try {
-        const lastSystem = await LastSystem.findOne({ admin: req.client.id });
-        var upload = multer({
-            fileFilter: fileFilter,
-            storage: multerS3({
-                s3: s3,
-                bucket: 'smarthomeproject',
-                acl: 'public-read',
-                metadata: function (req, file, cb) {
-                cb(null, {fieldName: file.fieldname});
-                },
-                key: function (req, file, cb) {
-                    let fullpath = lastSystem.system + '/' + file.originalname;
-                    cb(null, fullpath);
-                }
-        })
-        })
-        const singleUpload = upload.single('image');
-
-        singleUpload(req, res, async (err) => {
-            const system = await SmartHomeSystem.findById(lastSystem.system);
-            system.images.push(req.file.originalname);
-            await system.save();
-            return res.json({'imageUrl': req.file.location});
-        });
-        
-    } catch(err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
+router.post("/system/image", [auth ,upload.single("image")], async function(req, res) {
+    const lastSystem = await LastSystem.findOne({ admin: req.client.id });
+    const file = req.file;
+  
+    let s3bucket = new aws.S3({
+      accessKeyId: config.accessKeyId,
+      secretAccessKey: config.secretAccessKey,
+      region: config.region
+    });
+  
+    var params = {
+      Bucket: 'smarthomeproject',
+      Key: lastSystem.system + '/' + file.originalname,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+      ACL: "public-read"
+    };
+  
+    s3bucket.upload(params, async function(err, data) {
+      if (err) {
+        res.status(500).json({ error: true, Message: err });
+      } else {
+        const system = await SmartHomeSystem.findById(lastSystem.system);
+        system.images.push(req.file.originalname);
+        await system.save();
+        return res.json({'imageUrl': data.Location});
+        }
+    })
 });
+
+
 
 // @route    POST api/admin/system/deleteImage
 // @desc     Delete image
