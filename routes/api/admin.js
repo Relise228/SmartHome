@@ -251,6 +251,22 @@ router.get('/orders/finished', auth, async (req, res) => {
     }
 });
 
+// @route    GET api/admin/orders/all
+// @desc     Get all orders
+// @access   Private
+router.get('/orders/all', auth, async (req, res) => {
+    try {
+        const orders = await Order.find()
+        .populate('client')
+        .populate('products')
+        .sort('date');
+        res.json(orders);
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
 // @route    GET api/admin/orders/:number
 // @desc     Get order information
 // @access   Private
@@ -275,6 +291,22 @@ router.post('/orders/toDelivery', auth, async (req, res) => {
         const { orderId } = req.body;
         const order = await Order.findById( orderId );
         order.status = 'In delivery';
+        await order.save();
+        res.json(order);
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// @route    POST api/admin/orders/toFinished
+// @desc     Change delivery order to finished
+// @access   Private
+router.post('/orders/toFinished', auth, async (req, res) => {
+    try {
+        const { orderId } = req.body;
+        const order = await Order.findById( orderId );
+        order.status = 'Finished';
         await order.save();
         res.json(order);
     } catch(err) {
