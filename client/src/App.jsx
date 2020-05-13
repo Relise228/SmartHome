@@ -25,7 +25,7 @@ export class App extends React.Component {
                         <Route path='/client/signup' component={Registration} />
                         <Route path='/client/cart' component={Cart} />
                         <Route path='/admin' component={AdminPanel} />
-                        {/* <Redirect to='/404' /> */}
+                        <Redirect to='/404' />
                     </Switch>
                 {/* <Footer/> */}
                 </BrowserRouter>
