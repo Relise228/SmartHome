@@ -208,7 +208,7 @@ router.post('/system/quantity', auth, async (req, res) => {
 // @access   Private
 router.get('/orders/all', auth, async (req, res) => {
     try {
-        const orders = await Order.find()
+        const orders = await Order.find( { status: {$ne: 'Cart'}} )
         .populate('client')
         .populate('products')
         .sort('date');
