@@ -17,9 +17,9 @@ export class ProfilePage extends React.Component {
             allOrders: [],
             houseInfoVisible: false,
             showpage: false,
-            homeType: undefined,
-            homeSize: null,
-            roomsNumber: null
+            homeType: "Квартира",
+            homeSize: 0,
+            roomsNumber: 0
             
         }
         this.logOut = this.logOut.bind(this);
@@ -55,6 +55,7 @@ export class ProfilePage extends React.Component {
           }
           )
           .then( response => {
+            console.log(response);
             if(response.data.msg == "Token is not valid") {
                 localStorage.removeItem("token");
                 localStorage.removeItem("admin");

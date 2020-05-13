@@ -7,7 +7,7 @@ export class FieldInformation extends React.Component {
         super(props);
         this.state = {
             isVis: false,
-            textFieldValue: ''
+            textFieldValue: this.props.value
         }
         this.fieldRef = React.createRef();
         this.buttonRef = React.createRef();
@@ -22,8 +22,6 @@ export class FieldInformation extends React.Component {
 
       }
 
-   
-        
 
     showField () {
             this.setState({ isVis: true});  

@@ -31,6 +31,7 @@ export class AdminOrder extends React.Component {
         this.togleShortInfo = this.togleShortInfo.bind(this);
 
         this.toDelivery = this.toDelivery.bind(this);
+        this.toFinished = this.toFinished.bind(this);
 
         this.setQuantity = this.setQuantity.bind(this);
         
@@ -120,6 +121,31 @@ export class AdminOrder extends React.Component {
 
          }
 
+         toFinished()  {
+            console.log('asdasdasd');
+
+            const axios = require('axios');
+        
+        this.data = {
+            orderId: this.props.order._id
+        }
+
+        axios.post('http://localhost:5000/api/admin/orders/toFinished', this.data, {
+            headers: {
+                'x-auth-token': localStorage.token,
+                'Content-type': 'application/json'
+            }
+          }
+          )
+          .then( response => {
+                window.location.reload();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+         }
+
 
       
 
@@ -152,6 +178,7 @@ export class AdminOrder extends React.Component {
                         ))}
                     </div>
                     {this.props.buttonToDelivery ? <button className="button-toDelivery" onClick={this.toDelivery}>To delivery</button> : ''}
+                    {this.props.buttonToFinished ? <button className="button-toDelivery" onClick={this.toFinished}>To Finished</button> : ''}
                 </div> : ''}
                 
             </div>

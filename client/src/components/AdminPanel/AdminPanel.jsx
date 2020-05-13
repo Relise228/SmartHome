@@ -13,6 +13,7 @@ export class AdminPanel extends React.Component {
             needSearch: false,
             searchNumber : 0,
             buttonToDelivery: false,
+            buttonToFinished: false,
             addProduct: false,
             needAorderInfo: false,
             name: undefined,
@@ -54,9 +55,30 @@ export class AdminPanel extends React.Component {
         this.setState({ needAorderInfo: true });
         this.setState({ addProduct: false });
         this.setState({ needSearch: true });
-        this.setState({ orderVisible: false });
+        this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: false });
         this.setAllOrders([]);
+
+
+        const axios = require('axios');
+        axios.get('http://localhost:5000/api/admin/orders/all', {
+            headers: {
+                'Content-type': 'application/json',
+                'x-auth-token': localStorage.token
+            },
+            crossDomain: true
+          })
+          .then( response => {
+           
+          console.log(response);
+
+           this.setAllOrders(response.data);
+           
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          }); 
 
     }
     getConfirmedOrder() {
@@ -65,6 +87,7 @@ export class AdminPanel extends React.Component {
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: true });
+        this.setState({ buttonToFinished: false });
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
@@ -94,6 +117,7 @@ export class AdminPanel extends React.Component {
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: false });
+        this.setState({ buttonToFinished: false });
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
@@ -125,6 +149,7 @@ export class AdminPanel extends React.Component {
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
         this.setState({ buttonToDelivery: false });
+        this.setState({ buttonToFinished: true });
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
@@ -155,8 +180,10 @@ export class AdminPanel extends React.Component {
 
     fetchOrdersByNumber() {
         this.setState({ buttonToDelivery: false });
+        this.setState({ buttonToFinished: false });
         this.setAllOrders([]);
         this.setState({ orderVisible: true });
+        
         const axios = require('axios');
         axios.get(`http://localhost:5000/api/admin/orders/${this.state.searchNumber}`, {
             headers: {
@@ -166,6 +193,13 @@ export class AdminPanel extends React.Component {
             crossDomain: true
           })
           .then( response => {
+              if(response.data.status == "Confirmed") {
+                
+                this.setState({ buttonToDelivery: true });
+              }
+              if(response.data.status == "In delivery") {
+                this.setState({ buttonToFinished: true });
+              }
               if(response.data != null  ) {
                 if(response.data.status !=="Cart") {
                     const allOrders = this.state.allOrders.concat(response.data);
@@ -275,7 +309,7 @@ export class AdminPanel extends React.Component {
                     </div> : ''}
                     {this.state.orderVisible ?  <div className="admin_order-wrapper">
                         {this.state.allOrders ? this.state.allOrders.map(order => (
-                        <AdminOrder toDelivery={this.toDelivery} buttonToDelivery={this.state.buttonToDelivery} order={order} key={order._id}/>
+                        <AdminOrder buttonToFinished={this.state.buttonToFinished} toDelivery={this.toDelivery} buttonToDelivery={this.state.buttonToDelivery} order={order} key={order._id}/>
                         )) : ''}
                     </div> : ''}
                    

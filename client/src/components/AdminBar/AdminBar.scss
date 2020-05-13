@@ -5,9 +5,9 @@
    height: 100%;
     
     
-    border: 2px solid #0803F3;
+   border: 2px solid rgb(88, 156, 224);
     border-radius: 30px;
-    box-shadow: 5px 4px 5px rgba(8, 3, 243, 0.51);
+    box-shadow: 5px 4px 5px rgba(116, 174, 231, 0.47);
 
 
 
@@ -18,14 +18,14 @@
         border-radius: 30px;
         border: none;
         background-color: transparent;
-        color: #6260E5;
+        color: #206EBC;
         font-weight: bold;
         outline: none;
         cursor: pointer;
     }
 
     &_button:hover {
-        background-color: #6260E5;
+        background-color: #206EBC;
         color: #fff;
 
     }

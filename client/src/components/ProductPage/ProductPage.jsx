@@ -79,13 +79,12 @@ export class ProductPage extends React.Component {
     componentDidMount() {
         this.fetchProduct();
         this.fetchRecomended();
-        if(localStorage.token) {
+        console.log(this.feedBackRef);
 
-        } else{
-            this.feedBackRef.current.style.display = "none";
-        }
+        
             
     }
+   
     setRecomended(recomendedGoods) {
         this.setState({ recomendedGoods });
     }
@@ -608,7 +607,7 @@ sendImg(e) {
                             <option value="5">5</option>
                         </select>
                         <textarea className="feedback-area" ref={this.area}></textarea></div>
-                    <button className="review_button" ref={this.feedBackRef} onClick={this.leaveFeedBack}>Залишити відгук</button>
+                   {localStorage.token ? <button className="review_button" ref={this.feedBackRef} onClick={this.leaveFeedBack}>Залишити відгук</button> : ''}
 
                     </div>
                     <div className="product_recomended">

@@ -5,11 +5,11 @@
 
 .admin_order-wrapper {
     width: 100%;
-    max-width: 705px;
-    border: 2px solid #0803F3;
+    max-width: 805px;
+    border: 2px solid #206EBC;
     border-radius: 30px;
-    box-shadow: 5px 4px 5px rgba(8, 3, 243, 0.51);
-    padding: 0 5px 10px 5px;
+    box-shadow: 5px 4px 5px #74AEE7;
+    padding: 15px 15px 20px 15px;
     background-color: transparent;
     height: 100%;
     display: flex;
@@ -20,7 +20,7 @@
 
 .wrapper-aorder-inf {
     width: 100%;
-    max-width: 705px;
+    max-width: 805px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -33,28 +33,29 @@
 }
 
 .admin_input-search {
-    border: 2px solid #0803F3;
+    border: 2px solid #206EBC;
     border-radius: 30px;
     width: 400px;
     height: 35px;
-    padding: 0 5px;
+    padding: 0 10px;
+    font-weight: bold;
     outline: none;
 }
 
 .admin_button-search {
-    border: 2px solid #0803F3;
+    border: 2px solid #206EBC;
     margin-left: 10px;
     width: 100px;
     border-radius: 30px;
     height: 35px;
     background-color: transparent;
     outline: none;
-    color: #0803F3;
+    color: #206EBC;
     cursor: pointer;
 }
 
 .admin_button-search:hover {
-    background-color: #0803F3;
+    background-color: #206EBC;
     color: #fff;
 }
 
@@ -62,22 +63,22 @@
     border: 1px solid black;
     margin-left: 15%;
     padding: 30px;
-    border: 1px solid #0803F3;
+    border: 2px solid rgb(88, 156, 224);
     border-radius: 30px;
-    box-shadow: 5px 4px 5px rgba(8, 3, 243, 0.51);
+    box-shadow: 5px 4px 5px rgba(88, 156, 224, 0.47);
 }
 
 .add_product{
 
     &-name {
-        color: #0803F3;
+        color: #206EBC;
         font-weight: bold;
     }
 
     &-name-input {
         width: 300px;
         margin-left: 30px;
-        border: 1px solid #0803F3;
+        border: 1px solid rgb(88, 156, 224);
         height: 30px;
         border-radius: 30px;
         outline: none;
@@ -85,14 +86,14 @@
         padding-left: 15px;
     }
     &-manufacture {
-        color: #0803F3;
+        color: #206EBC;
         font-weight: bold;
     }
     &-manufacture-input {
         margin-top: 30px;
         width: 300px;
         margin-left: 30px;
-        border: 1px solid #0803F3;
+        border: 1px solid rgb(88, 156, 224);
         height: 30px;
         border-radius: 30px;
         outline: none;
@@ -101,7 +102,7 @@
     }
 
     &-count {
-        color: #0803F3;
+        color: #206EBC;
         font-weight: bold;
     }
 
@@ -109,7 +110,7 @@
         margin-top: 30px;
         width: 100px;
         margin-left: 30px;
-        border: 1px solid #0803F3;
+        border: 1px solid rgb(88, 156, 224);
         height: 30px;
         border-radius: 30px;
         outline: none;
@@ -118,7 +119,7 @@
     }
 
     &-discount {
-        color: #0803F3;
+        color: #206EBC;
         font-weight: bold;
     }
 
@@ -126,7 +127,7 @@
         margin-top: 30px;
         width: 100px;
         margin-left: 30px;
-        border: 1px solid #0803F3;
+        border: 1px solid rgb(88, 156, 224);
         height: 30px;
         border-radius: 30px;
         outline: none;
@@ -139,36 +140,27 @@
         width: 500px;
         height: 200px;
         margin-top: 30px;
-        border: 1px solid #0803F3;
+        border: 1px solid rgb(88, 156, 224);
         border-radius: 30px;
         outline: none;
         font-size: 14px;
         padding: 15px;
     }
 
-    &-photo{
-        color: #0803F3;
-        font-weight: bold;
-    }
-
-    &-photo-input {
-        margin-top: 30px;
-        margin-left: 30px;
-    }
 
     &-button {
         margin-top: 30px;
         width: 100%;
         height: 50px;
         background-color: transparent;
-        border: 1px solid #0803F3;
+        border: 1px solid #206EBC;
         border-radius: 50px;
-        color: #0803F3;
+        color: #206EBC;
         font-size: 16px;
         font-weight: bold;
     }
     &-button:hover {
-        background-color: #0803F3;
+        background-color: #206EBC;
         color: #fff;
         cursor: pointer;
     }
