@@ -16,7 +16,10 @@ export class ProfilePage extends React.Component {
             email: undefined,
             allOrders: [],
             houseInfoVisible: false,
-            showpage: false
+            showpage: false,
+            homeType: undefined,
+            homeSize: null,
+            roomsNumber: null
             
         }
         this.logOut = this.logOut.bind(this);
@@ -61,8 +64,9 @@ export class ProfilePage extends React.Component {
 
             this.setInfo(response.data.name,
                 response.data.telephoneNumber,
-                response.data.email);
-                
+                response.data.email, response.data.home.homeType,
+                response.data.home.homeSize, response.data.home.roomsNumber);
+                console.log(response.data);
                console.log(response.data.msg);
                
 
@@ -107,8 +111,8 @@ export class ProfilePage extends React.Component {
         this.setState({allOrders});
     }
 
-    setInfo(name, telephoneNumber, email) {
-        this.setState({name, telephoneNumber, email});
+    setInfo(name, telephoneNumber, email, homeType, homeSize, roomsNumber) {
+        this.setState({name, telephoneNumber, email, homeType, homeSize, roomsNumber});
     }
 
    
@@ -213,7 +217,11 @@ export class ProfilePage extends React.Component {
                                 <FieldInformation inf="ПІБ" value={this.state.name} clickBtn={this.onChangePIB}/>
                                 <FieldInformation inf="Тел. ном." value={this.state.telephoneNumber} clickBtn={this.onChangePhone}/>
                                 <FieldInformation inf="E-mail" value={this.state.email} clickBtn={this.onChangeEmail}/>
-                                <HouseInfo onHouseInfoShow={this.onHouseInfoSave} isVisibleInfo={this.state.houseInfoVisible}/>
+                                <HouseInfo homeType={this.state.homeType}
+                                           homeSize={this.state.homeSize}
+                                           roomsNumber={this.state.roomsNumber}
+                                           onHouseInfoShow={this.onHouseInfoSave}
+                                           isVisibleInfo={this.state.houseInfoVisible}/>
                             
                             <button onClick={this.onHouseDescriptionEdit} className="info_button-house">Вказати опис будинку</button>
                             <button  onClick={this.logOut} className="info_button-logout">Вихід</button>
