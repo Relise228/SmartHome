@@ -510,33 +510,36 @@ addPhoto() {
     });
 }
 
-sendImg() {
+sendImg(e) {
+    e.preventDefault();
     console.log(this.imgInput.current.files[0]);
     
     const axios = require('axios');
-    let file = this.imgInput.current.files[0];
 
     let formdata = new FormData();
 
-    formdata.append('image', file);
+    formdata.append('image', this.imgInput.current.files[0]);
+    
+   console.log(formdata.getAll('image')); 
 
+   
+        
 
-    this.data = {
-        image: formdata
-    }
+   
 
-    console.log(this.data)
-
-    axios.post('http://localhost:5000/api/admin/system/image', this.data, {
+    axios({
+        url: 'http://localhost:5000/api/admin/system/image',
+        method: "POST",
         headers: {
             'x-auth-token': localStorage.token
-        }, 
+        },
+        data : formdata 
     }
     )
     .then( response => {
 
        console.log(response);
-    //    window.location.reload();
+       window.location.reload();
         
     })
     .catch(function (error) {
@@ -573,7 +576,8 @@ sendImg() {
                         { this.state.nameChange ? <input className="edit_input" onChange={this.onChangeTitle} type="text" value={this.state.title}/> : <h2 className="product_name" onDoubleClickCapture={this.setTitleChange}>{this.state.title}</h2>}
                         {localStorage.admin ? <button className="button-visibility" onClick={this.setVisibility}>{this.state.status}</button> : ''}
                         {localStorage.admin && this.state.images.length < 4 ? <button onClick={this.addPhoto} className="button-visibility" >Додати фото</button> : ''}    
-                        {this.state.addImg ? <div className="div-photo"><input accept="image/jpeg,image/png" ref={this.imgInput}  type="file"/> <button onClick={this.sendImg} className="send-photo">OK</button></div> : ''}   
+                        {this.state.addImg ? <form encType="form-data" action="http://localhost:5000/api/admin/system/image" method="POST" className="div-photo"><input accept="image/jpeg,image/png" ref={this.imgInput}  type="file"/> <button onClick={this.sendImg} className="send-photo">OK</button></form> : ''}   
+                            
                             <p className='product_code'>{"Код товару: " + this.state.code}</p>
                             { this.state.stockChange ? <input className="edit_input" onChange={this.onChangeStock} type="text" value={this.state.stock}/> : <p className="stock" onDoubleClickCapture={this.setStockChange}>{'У наявності: ' + this.state.stock}</p>}
                             { this.state.discountChange ? <input className="edit_input" onChange={this.onChangeDiscount} type="text" value={this.state.discount}/> : <p className="discount_" onDoubleClickCapture={this.setDiscountChange}>{'Знижка: ' + this.state.discount + '%'}</p>}
