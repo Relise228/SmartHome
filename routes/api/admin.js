@@ -203,6 +203,22 @@ router.post('/system/quantity', auth, async (req, res) => {
     }
 });
 
+// @route    GET api/admin/orders/all
+// @desc     Get all orders
+// @access   Private
+router.get('/orders/all', auth, async (req, res) => {
+    try {
+        const orders = await Order.find()
+        .populate('client')
+        .populate('products')
+        .sort('date');
+        res.json(orders);
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
 // @route    GET api/admin/orders/confirmed
 // @desc     Get all confirmed orders
 // @access   Private
@@ -241,22 +257,6 @@ router.get('/orders/delivery', auth, async (req, res) => {
 router.get('/orders/finished', auth, async (req, res) => {
     try {
         const orders = await Order.find({ status: 'Finished' })
-        .populate('client')
-        .populate('products')
-        .sort('date');
-        res.json(orders);
-    } catch(err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
-});
-
-// @route    GET api/admin/orders/all
-// @desc     Get all orders
-// @access   Private
-router.get('/orders/all', auth, async (req, res) => {
-    try {
-        const orders = await Order.find()
         .populate('client')
         .populate('products')
         .sort('date');
