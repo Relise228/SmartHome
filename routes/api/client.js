@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 const Client = require('../../models/Client');
+const Home = require('../../models/Home');
 const Order = require('../../models/Order');
 const SystemCounter = require('../../models/SystemCounter');
 
@@ -36,12 +37,20 @@ router.post('/', [
         if (user) {
             return res.json({ errors: [{ msg: 'Telephone number is already used' }] });
         }
+
+        let home = new Home({
+            homeType: 'Квартира',
+            homeSize: 0,
+            roomsNumber: 0
+        });
+        await home.save();
         
         user = new Client({
             name,
             password,
             telephoneNumber,
-            email
+            email,
+            home: home.id
         });
 
         const salt = await bcrypt.genSalt(10);
