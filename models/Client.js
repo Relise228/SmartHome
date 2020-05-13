@@ -22,7 +22,7 @@ const ClientSchema = new mongoose.Schema({
     home: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'home',
-        required: false
+        required: true
     },
     type: {
         type: String,
