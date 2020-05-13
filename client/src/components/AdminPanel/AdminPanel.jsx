@@ -12,8 +12,6 @@ export class AdminPanel extends React.Component {
             orderVisible: false,
             needSearch: false,
             searchNumber : 0,
-            buttonToDelivery: false,
-            buttonToFinished: false,
             addProduct: false,
             needAorderInfo: false,
             name: undefined,
@@ -56,7 +54,6 @@ export class AdminPanel extends React.Component {
         this.setState({ addProduct: false });
         this.setState({ needSearch: true });
         this.setState({ orderVisible: true });
-        this.setState({ buttonToDelivery: false });
         this.setAllOrders([]);
 
 
@@ -86,8 +83,6 @@ export class AdminPanel extends React.Component {
         this.setState({ addProduct: false });
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
-        this.setState({ buttonToDelivery: true });
-        this.setState({ buttonToFinished: false });
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
@@ -116,8 +111,6 @@ export class AdminPanel extends React.Component {
         this.setState({ addProduct: false });
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
-        this.setState({ buttonToDelivery: false });
-        this.setState({ buttonToFinished: false });
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
@@ -148,8 +141,6 @@ export class AdminPanel extends React.Component {
         this.setState({ addProduct: false });
         this.setState({ needSearch: false });
         this.setState({ orderVisible: true });
-        this.setState({ buttonToDelivery: false });
-        this.setState({ buttonToFinished: true });
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
@@ -179,8 +170,6 @@ export class AdminPanel extends React.Component {
     }
 
     fetchOrdersByNumber() {
-        this.setState({ buttonToDelivery: false });
-        this.setState({ buttonToFinished: false });
         this.setAllOrders([]);
         this.setState({ orderVisible: true });
         
@@ -193,13 +182,6 @@ export class AdminPanel extends React.Component {
             crossDomain: true
           })
           .then( response => {
-              if(response.data.status == "Confirmed") {
-                
-                this.setState({ buttonToDelivery: true });
-              }
-              if(response.data.status == "In delivery") {
-                this.setState({ buttonToFinished: true });
-              }
               if(response.data != null  ) {
                 if(response.data.status !=="Cart") {
                     const allOrders = this.state.allOrders.concat(response.data);
@@ -309,7 +291,7 @@ export class AdminPanel extends React.Component {
                     </div> : ''}
                     {this.state.orderVisible ?  <div className="admin_order-wrapper">
                         {this.state.allOrders ? this.state.allOrders.map(order => (
-                        <AdminOrder buttonToFinished={this.state.buttonToFinished} toDelivery={this.toDelivery} buttonToDelivery={this.state.buttonToDelivery} order={order} key={order._id}/>
+                        <AdminOrder buttonToFinished={order.status == "In delivery"} toDelivery={this.toDelivery} buttonToDelivery={order.status == "Confirmed"} order={order} key={order._id}/>
                         )) : ''}
                     </div> : ''}
                    
