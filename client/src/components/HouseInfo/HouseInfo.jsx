@@ -5,15 +5,19 @@ export class HouseInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            houseType: 'Квартира',
-            houseArea: 0,
-            houseRoom: 1
+            houseType: this.props.homeType,
+            houseArea: this.props.homeSize,
+            houseRoom: this.props.roomsNumber
         }
         this.onHouseInfoSave = this.onHouseInfoSave.bind(this);
         this.onChangeHouseType = this.onChangeHouseType.bind(this);
         this.onChangeHouseArea = this.onChangeHouseArea.bind(this);
         this.onChangeHouseRoom = this.onChangeHouseRoom.bind(this);
 
+    }
+
+    componentDidMount() {
+        console.log(this.state.homeType + '\n' + this.state.homeSize + '\n' + this.state.roomsNumber)
     }
 
     onHouseInfoSave(e) {
@@ -63,14 +67,14 @@ export class HouseInfo extends React.Component {
         return(
             <form onSubmit={this.onHouseInfoSave} className={ this.props.isVisibleInfo ? 'house_info house_display':'house_info' } >
                 <label className="house_text">Тип житла</label>
-                    <select className="house_type" onChange={this.onChangeHouseType}>
+                    <select defaultValue={this.state.houseType} className="house_type" onChange={this.onChangeHouseType}>
                         <option>Квартира</option>
                         <option>Будинок</option>
                     </select><br/>
                 <label className="house_text">Площа(м²)</label>
-                    <input onChange={this.onChangeHouseArea} type="number" name="" className="house_area"/><br/>
+                    <input value={this.state.houseArea} onChange={this.onChangeHouseArea} type="number" name="" className="house_area"/><br/>
                 <label className="house_text">Кількість кімнат</label>
-                    <input onChange={this.onChangeHouseRoom} type="number" name="" className="house_area house_room"/><br/>
+                    <input value={this.state.houseRoom} onChange={this.onChangeHouseRoom} type="number" name="" className="house_area house_room"/><br/>
                 <button className="house_save" >Зберегти</button>
             </form>
         );
