@@ -12,11 +12,24 @@
 
     &_number{
         font-weight: bold;
+        width: 25%;
+        text-align: center;
+    }
+    &_date {
+        width: 25%;
+        text-align: right;
     }
 
     &_total-price {
         font-weight: bold;
         color: #206EBC;
+        width: 25%;
+        text-align: right;
+    }
+
+    &_status {
+        width: 25%;
+        text-align: right;
     }
 
 
