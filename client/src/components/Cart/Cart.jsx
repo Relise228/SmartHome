@@ -9,6 +9,7 @@ export class Cart extends React.Component {
         this.state = {
             cartProducts: [],
             totalPrice: 0
+  
 
         }
         
@@ -19,6 +20,7 @@ export class Cart extends React.Component {
         this.setTotalPrice = this.setTotalPrice.bind(this);
         this.minusTotalPrice = this.minusTotalPrice.bind(this);
         this.confirmOrder =  this.confirmOrder.bind(this);
+
 
 
     }
@@ -33,7 +35,7 @@ export class Cart extends React.Component {
     fetchOrders() {
         const axios = require('axios');
 
-        axios.get('http://localhost:5000/api/cart', {
+        axios.get('/api/cart', {
             headers: {
                 'Content-Type': 'application/json',
                 'x-auth-token': localStorage.token
@@ -51,11 +53,14 @@ export class Cart extends React.Component {
 
 
             this.setCartProducts(response.data.products);
+
           })
           .catch(function (error) {
             console.log(error);
           });
     }
+
+   
 
 
 
@@ -92,7 +97,7 @@ export class Cart extends React.Component {
                    adress: this.addressInput.current.value
                 }
 
-                axios.post('http://localhost:5000/api/cart/confirm', this.data, {
+                axios.post('/api/cart/confirm', this.data, {
                     headers: {
                         'x-auth-token': localStorage.token,
                         'Content-type': 'application/json'
@@ -105,12 +110,7 @@ export class Cart extends React.Component {
                 })
                 .catch(function (error) {
                     console.log(error);
-                });
-
-
-
-
-               
+                }); 
             }
         }
         
@@ -125,12 +125,12 @@ export class Cart extends React.Component {
         return(
             <div className="wrapper">
                 <p className="cart_name">Корзина</p>
-                <div className="cart_wrapper">
+               <div className="cart_wrapper">
                     {this.state.cartProducts.map(product =>(                
                         <CartProduct key={product._id}  product={product} setPrice={this.setTotalPrice} minusTotalPrice = {this.minusTotalPrice}/>
                     ))}
-                </div>
-                <div className="cart_total-price" >
+                </div> 
+              <div className="cart_total-price" >
                     <label className="sum">Сума </label>
                     <label ref={this.totalPrice}></label>
                 </div>
@@ -141,9 +141,9 @@ export class Cart extends React.Component {
                         <input type="text" className="cart_input-address" ref={this.addressInput}/>
                     </div>
                    {this.state.totalPrice !== 0 ? <button className="cart_button" onClick={this.confirmOrder}>Оформити</button> : ''}
-                </div>
+                </div> 
         
-            </div>
+            </div> 
         )
     }
 }

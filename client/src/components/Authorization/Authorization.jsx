@@ -39,7 +39,7 @@ export class Authorization extends React.Component {
         e.preventDefault();
         const axios = require('axios');
 
-        axios.post('http://localhost:5000/api/auth', {
+        axios.post('/api/auth', {
             headers: {
                 'Content-type': 'application/json'
             },

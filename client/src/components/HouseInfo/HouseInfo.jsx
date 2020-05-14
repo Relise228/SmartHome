@@ -35,7 +35,7 @@ export class HouseInfo extends React.Component {
             roomsNumber: this.state.houseRoom
         }
 
-        axios.post('http://localhost:5000/api/profile/home', this.data, {
+        axios.post('/api/profile/home', this.data, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'

@@ -57,7 +57,7 @@ export class Registration extends React.Component {
         }
         console.log(this.data);
 
-        axios.post('http://localhost:5000/api/client', this.data, {
+        axios.post('/api/client', this.data, {
             headers: {
                 'Content-type': 'application/json'
             }, 

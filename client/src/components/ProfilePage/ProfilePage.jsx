@@ -48,7 +48,7 @@ export class ProfilePage extends React.Component {
 
         const axios = require('axios');
 
-        axios.get('http://localhost:5000/api/auth', {
+        axios.get('/api/auth', {
             headers: {
                 'x-auth-token': localStorage.token
             } 
@@ -87,7 +87,7 @@ export class ProfilePage extends React.Component {
     getUserOrder() {
         const axios = require('axios');
 
-        axios.get('http://localhost:5000/api/order', {
+        axios.get('/api/order', {
             headers: {
                 'Content-Type': 'application/json',
                 'x-auth-token': localStorage.token
@@ -128,7 +128,7 @@ export class ProfilePage extends React.Component {
     onChangePIB(value) {
         const axios = require('axios');
         
-        axios.post('http://localhost:5000/api/profile/pib', {name: value}, {
+        axios.post('/api/profile/pib', {name: value}, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'
@@ -147,7 +147,7 @@ export class ProfilePage extends React.Component {
     onChangePhone(value) {
         const axios = require('axios');
         
-        axios.post('http://localhost:5000/api/profile/telephone', {telephoneNumber: value}, {
+        axios.post('/api/profile/telephone', {telephoneNumber: value}, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'
@@ -166,7 +166,7 @@ export class ProfilePage extends React.Component {
     onChangeEmail(value) {
         const axios = require('axios');
         
-        axios.post('http://localhost:5000/api/profile/email', {email: value}, {
+        axios.post('/api/profile/email', {email: value}, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'
@@ -189,10 +189,6 @@ export class ProfilePage extends React.Component {
             this.setState({houseInfoVisible: false});
     }
 
-    
-    
-
-   
     
     render() {
 

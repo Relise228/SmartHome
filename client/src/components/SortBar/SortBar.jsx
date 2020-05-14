@@ -41,11 +41,6 @@ export class SortBar extends React.Component {
         this.state.checked.map( item => {
             item.current.checked = true;
         });
-
-       
-
-        // this.inelsRef.current.checked = true;
-
    }
 
    onChangePriceFrom (e) {

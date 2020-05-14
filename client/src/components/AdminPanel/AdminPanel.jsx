@@ -58,7 +58,7 @@ export class AdminPanel extends React.Component {
 
 
         const axios = require('axios');
-        axios.get('http://localhost:5000/api/admin/orders/all', {
+        axios.get('/api/admin/orders/all', {
             headers: {
                 'Content-type': 'application/json',
                 'x-auth-token': localStorage.token
@@ -86,7 +86,7 @@ export class AdminPanel extends React.Component {
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
-        axios.get('http://localhost:5000/api/admin/orders/confirmed', {
+        axios.get('/api/admin/orders/confirmed', {
             headers: {
                 'Content-type': 'application/json',
                 'x-auth-token': localStorage.token
@@ -114,7 +114,7 @@ export class AdminPanel extends React.Component {
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
-        axios.get('http://localhost:5000/api/admin/orders/finished', {
+        axios.get('/api/admin/orders/finished', {
             headers: {
                 'Content-type': 'application/json',
                 'x-auth-token': localStorage.token
@@ -144,7 +144,7 @@ export class AdminPanel extends React.Component {
         this.setAllOrders([]);
         console.log("getConfirmedOrder");
         const axios = require('axios');
-        axios.get('http://localhost:5000/api/admin/orders/delivery', {
+        axios.get('/api/admin/orders/delivery', {
             headers: {
                 'Content-type': 'application/json',
                 'x-auth-token': localStorage.token
@@ -174,7 +174,7 @@ export class AdminPanel extends React.Component {
         this.setState({ orderVisible: true });
         
         const axios = require('axios');
-        axios.get(`http://localhost:5000/api/admin/orders/${this.state.searchNumber}`, {
+        axios.get(`/api/admin/orders/${this.state.searchNumber}`, {
             headers: {
                 'Content-type': 'application/json',
                 'x-auth-token': localStorage.token
@@ -246,7 +246,7 @@ export class AdminPanel extends React.Component {
                                     price: this.state.price
                                 }
                         
-                                axios.post('http://localhost:5000/api/admin/system', this.data, {
+                                axios.post('/api/admin/system', this.data, {
                                     headers: {
                                         'x-auth-token': localStorage.token,
                                         'Content-type': 'application/json'

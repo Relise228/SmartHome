@@ -36,7 +36,7 @@ export class CartProduct extends React.Component {
             productInOrderId: this.props.product._id
         }
 
-        axios.post('http://localhost:5000/api/cart/delete', this.data, {
+        axios.post('/api/cart/delete', this.data, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'
@@ -60,7 +60,7 @@ export class CartProduct extends React.Component {
         }
        
 
-        axios.post('http://localhost:5000/api/cart/change', this.data, {
+        axios.post('/api/cart/change', this.data, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'

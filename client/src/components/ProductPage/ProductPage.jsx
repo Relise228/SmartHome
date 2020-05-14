@@ -95,7 +95,7 @@ export class ProductPage extends React.Component {
 
     fetchRecomended() {
         const axios = require('axios');
-        axios.get(`http://localhost:5000/api/goods/?perpage=4`, {
+        axios.get(`/api/goods/?perpage=4`, {
             headers: {
                 'Content-type': 'application/json'
             },
@@ -117,7 +117,7 @@ export class ProductPage extends React.Component {
 
    fetchProduct() {
     const axios = require('axios');
-        axios.get(`http://localhost:5000/api/goods/${this.state.productID}`, {
+        axios.get(`/api/goods/${this.state.productID}`, {
             headers: {
                 'Content-type': 'application/json'
             },
@@ -188,7 +188,7 @@ export class ProductPage extends React.Component {
         }
         console.log(this.data);
 
-        axios.post('http://localhost:5000/api/cart', this.data, {
+        axios.post('/api/cart', this.data, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'
@@ -240,7 +240,7 @@ export class ProductPage extends React.Component {
                rating: this.markRef.current.value
             }
 
-            axios.post('http://localhost:5000/api/review', this.data, {
+            axios.post('/api/review', this.data, {
                 headers: {
                     'x-auth-token': localStorage.token,
                     'Content-type': 'application/json'
@@ -277,7 +277,7 @@ export class ProductPage extends React.Component {
         price: this.state.price
     }
 
-    axios.post('http://localhost:5000/api/admin/system/price', this.data, {
+    axios.post('/api/admin/system/price', this.data, {
         headers: {
             'x-auth-token': localStorage.token,
             'Content-type': 'application/json'
@@ -313,7 +313,7 @@ saveNameStockDiscount() {
         title: this.state.title
     }
 
-    axios.post('http://localhost:5000/api/admin/system/title', this.data, {
+    axios.post('/api/admin/system/title', this.data, {
         headers: {
             'x-auth-token': localStorage.token,
             'Content-type': 'application/json'
@@ -335,7 +335,7 @@ saveNameStockDiscount() {
         quantity: this.state.stock
     }
 
-    axios.post('http://localhost:5000/api/admin/system/quantity', this.data, {
+    axios.post('/api/admin/system/quantity', this.data, {
         headers: {
             'x-auth-token': localStorage.token,
             'Content-type': 'application/json'
@@ -358,7 +358,7 @@ saveNameStockDiscount() {
             discount: this.state.discount
         }
     
-        axios.post('http://localhost:5000/api/admin/system/discount', this.data, {
+        axios.post('/api/admin/system/discount', this.data, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'
@@ -388,8 +388,6 @@ onChangeStock(e) {
 setDescriptionChange() {
     if(localStorage.admin)
         this.setState({descriptionChange: true});
-        
-
 }
 
 onChangeDescription(e) {
@@ -405,7 +403,7 @@ saveDescription() {
         description: this.state.description
     }
 
-    axios.post('http://localhost:5000/api/admin/system/description', this.data, {
+    axios.post('/api/admin/system/description', this.data, {
         headers: {
             'x-auth-token': localStorage.token,
             'Content-type': 'application/json'
@@ -436,16 +434,8 @@ onChangeDiscount(e) {
 
 onClickImage(e) {
     const src = e.currentTarget.src;
- 
-   
-
-   
-    
-
     this.setState({ srcModal: src });
-    this.setState({ showModal: true });
-        
-    
+    this.setState({ showModal: true });    
 }
 
 closeModal() {
@@ -457,9 +447,9 @@ setVisibility() {
     const axios = require('axios');
     let adress = '';
     if(this.state.status == 'Visible') {
-        adress = 'http://localhost:5000/api/admin/system/notVisible';
+        adress = '/api/admin/system/notVisible';
     } else {
-        adress = 'http://localhost:5000/api/admin/system/visible';
+        adress = '/api/admin/system/visible';
     }
         
         this.data = {
@@ -492,7 +482,7 @@ addPhoto() {
         systemId: this.state.productID
     }
 
-    axios.post('http://localhost:5000/api/admin/system/setId', this.data, {
+    axios.post('/api/admin/system/setId', this.data, {
         headers: {
             'x-auth-token': localStorage.token,
             'Content-type': 'application/json'
@@ -521,13 +511,9 @@ sendImg(e) {
     
    console.log(formdata.getAll('image')); 
 
-   
-        
-
-   
 
     axios({
-        url: 'http://localhost:5000/api/admin/system/image',
+        url: '/api/admin/system/image',
         method: "POST",
         headers: {
             'x-auth-token': localStorage.token

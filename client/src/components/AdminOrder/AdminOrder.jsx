@@ -47,7 +47,7 @@ export class AdminOrder extends React.Component {
     fetchProducts() {
         const axios = require('axios');
         this.props.order.products.map(product => {
-            axios.get(`http://localhost:5000/api/goods/${product.product}`, {
+            axios.get(`/api/goods/${product.product}`, {
             headers: {
                 'Content-type': 'application/json'
             },
@@ -105,7 +105,7 @@ export class AdminOrder extends React.Component {
             orderId: this.props.order._id
         }
 
-        axios.post('http://localhost:5000/api/admin/orders/toDelivery', this.data, {
+        axios.post('/api/admin/orders/toDelivery', this.data, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'
@@ -130,7 +130,7 @@ export class AdminOrder extends React.Component {
             orderId: this.props.order._id
         }
 
-        axios.post('http://localhost:5000/api/admin/orders/toFinished', this.data, {
+        axios.post('/api/admin/orders/toFinished', this.data, {
             headers: {
                 'x-auth-token': localStorage.token,
                 'Content-type': 'application/json'

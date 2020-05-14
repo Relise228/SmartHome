@@ -25,7 +25,7 @@ export class MainContent extends React.Component {
 
 
         const axios = require('axios');
-        axios.get (query != undefined ? 'http://localhost:5000/api/goods/' + query : 'http://localhost:5000/api/goods/', {
+        axios.get (query != undefined ? '/api/goods/' + query : '/api/goods/', {
             headers: {
                 'Content-type': 'application/json'
             },
@@ -57,14 +57,7 @@ export class MainContent extends React.Component {
 
     }
 
-   
-
-
     render() {
-
-
-
-
         return(
             <div className="main_content">
                 <SortBar history={this.props.history} location={this.props.location}/>
