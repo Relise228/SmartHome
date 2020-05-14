@@ -1,4 +1,5 @@
 import React from "react";
+import {Helmet} from "react-helmet";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Main } from "./components/Main";
 import { Header } from "./components/Header";
@@ -15,6 +16,7 @@ export class App extends React.Component {
         return (
             <div>
                 <BrowserRouter>
+                <Helmet title="Smart Home" />
                 <Header/>
                     <Switch>
                         <Route  exact={true} path='/' component={Main} />
